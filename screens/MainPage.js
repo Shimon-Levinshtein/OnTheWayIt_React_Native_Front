@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 // import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -23,7 +23,7 @@ const PlacesListScreen = props => {
       <View style={styles.containingButton}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.textButton}>קבלת שירות</Text>
-          {/* <Ionicons name="suitcase" size={24} color={Colors.primary} /> */}
+          <FontAwesome name="suitcase" size={24} color={Colors.primary} />
         </TouchableOpacity>
       </View>
     </View>
