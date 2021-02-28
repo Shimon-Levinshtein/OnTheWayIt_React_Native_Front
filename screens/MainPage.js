@@ -1,21 +1,31 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
 
-// import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-
-// import HeaderButton from '../components/Headers/HeaderButton';
 import Colors from '../constants/Colors';
 
 
 const PlacesListScreen = props => {
+  const places = useSelector(state => state.user);
+  // console.log(places);
+  const dispatch = useDispatch();
+
+  const handlerProvidingService = () => {
+    if(places.connected) {
+      console.log('connected!!!');
+    } else {
+      props.navigation.navigate('LoginOrSignUp');
+    }
+  };
+
   return (
     <View style={styles.continer}>
       <View style={styles.containingTitelText}>
         <Text style={styles.titelText}>על הדרך</Text>
       </View>
       <View style={styles.containingButton}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => handlerProvidingService()}>
           <Text style={styles.textButton}>נתינת שירות</Text>
           <Ionicons name="car" size={24} color={Colors.primary} />
         </TouchableOpacity>
@@ -30,24 +40,6 @@ const PlacesListScreen = props => {
   )
 };
 
-// PlacesListScreen.navigationOptions = navData => {
-//   return {
-//     headerTitle: '',
-//     headerRight: () => (
-//       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-//         <Item
-//           title="Home page"
-//           // iconName= {Platform.OS === 'android' ? 'menu' : "ios-menu"}
-//           iconName="ios-restaurant"
-//           onPress={() => {
-//             alert('Holou!');
-//             // navData.navigation.toggleDrawer();
-//           }}
-//         />
-//       </HeaderButtons>
-//     )
-//   };
-// };
 
 const styles = StyleSheet.create({
   continer: {

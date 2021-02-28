@@ -9,7 +9,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Colors from '../constants/Colors';
 
 import MainPage from '../screens/MainPage';
-import Test from '../screens/Test';
+
+import LoginOrSignUp from '../screens/Drivers/LoginOrSignUp';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -22,7 +23,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="עמוד ראשי"
+        name="HomePage"
         component={MainPage}
         options={({ navigation, route }) => ({
           headerRight: props =>
@@ -33,6 +34,7 @@ const HomeStack = () => {
             <EvilIcons name="user" size={45} color='white' style={{ marginLeft: 10 }} />
             <FontAwesome name="bell" size={25} color='white' style={{ marginLeft: 7, marginTop: 5 }} />
           </View>,
+          headerTintColor: '#00a9ff',
           headerStyle: {
             backgroundColor: '#00a9ff',
           },
@@ -41,13 +43,20 @@ const HomeStack = () => {
     </Stack.Navigator>
   );
 }
+const LoginOrSignUpDriver = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp}/>
+    </Stack.Navigator>
+  );
+}
 
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerPosition='right' drawerType='front'>
-      <Drawer.Screen name="עמוד ראשי" children={HomeStack} />
-      <Drawer.Screen name="Test" component={Test} />
+      <Drawer.Screen name="עמוד ראשי" component={HomeStack} />
+      <Drawer.Screen name="התחבר" component={LoginOrSignUpDriver} />
     </Drawer.Navigator>
   );
 };

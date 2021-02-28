@@ -3,27 +3,26 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+
+const store = createStore(reducers, applyMiddleware(thunk));
 
 import DrawerNavigator from './navigation/DrawerNavigator';
 
 export default function App() {
   return (
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!</Text>
-    //   <Ionicons name="md-checkmark-circle" size={32} color="green" />
-    //   <StatusBar style="auto" />
+    <Provider store={store}>
       <NavigationContainer>
-        <DrawerNavigator/>
+        <DrawerNavigator />
       </NavigationContainer>
-    // </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
