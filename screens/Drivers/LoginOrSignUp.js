@@ -14,7 +14,7 @@ const LoginOrSignUp = props => {
   };
 
   const handlerSignUpButton = () => {
-    //   props.navigation.navigate('XXX');
+      props.navigation.navigate('StepA');
   };
 
   return (

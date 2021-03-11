@@ -9,13 +9,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Colors from '../constants/Colors';
 
 import MainPage from '../screens/MainPage';
-
 import LoginOrSignUp from '../screens/Drivers/LoginOrSignUp';
+import StepA from '../screens/Drivers/CreateAccount/StepA';
+
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
-
+const menuScreenOptions = ({ navigation, route }) => ({
+  headerLeft: props =>
+      <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+          <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10, marginLeft: 10 }} />
+      </TouchableOpacity>,
+  headerTintColor: 'white',
+  headerStyle: {
+      backgroundColor: '#00a9ff',
+  },
+});
 
 
 
@@ -26,13 +36,13 @@ const HomeStack = () => {
         name="HomePage"
         component={MainPage}
         options={({ navigation, route }) => ({
-          headerRight: props =>
+          headerLeft: props =>
             <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
               <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10 }} />
             </TouchableOpacity>,
-          headerLeft: props => <View style={styles.continerHeaderLeftIcons}>
-            <EvilIcons name="user" size={45} color='white' style={{ marginLeft: 10 }} />
-            <FontAwesome name="bell" size={25} color='white' style={{ marginLeft: 7, marginTop: 5 }} />
+          headerRight: props => <View style={styles.continerHeaderLeftIcons}>
+            <FontAwesome name="bell" size={23} color='white' style={{ marginLeft: 7, marginTop: 7 }} />
+            <EvilIcons name="user" size={48} color='white' style={{ marginLeft: 10, marginRight: 10 }} />
           </View>,
           headerTintColor: '#00a9ff',
           headerStyle: {
@@ -42,14 +52,17 @@ const HomeStack = () => {
       />
     </Stack.Navigator>
   );
-}
+};
+
+
 const LoginOrSignUpDriver = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp}/>
-    </Stack.Navigator>
-  );
-}
+    return (
+        <Stack.Navigator screenOptions={menuScreenOptions}>
+            <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp} options={{title: ''}} />
+            <Stack.Screen name="StepA" component={StepA} options={{title: ''}} />
+        </Stack.Navigator>
+    );
+};
 
 
 const DrawerNavigator = () => {
