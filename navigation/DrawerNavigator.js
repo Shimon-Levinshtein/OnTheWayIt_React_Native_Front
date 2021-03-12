@@ -69,7 +69,7 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerPosition='right' drawerType='front'>
       <Drawer.Screen name="עמוד ראשי" component={HomeStack} />
-      <Drawer.Screen name="התחבר" component={LoginOrSignUpDriver} />
+      <Drawer.Screen name="Drivers" component={LoginOrSignUpDriver} options={{title: 'Bנהגים'}} />
     </Drawer.Navigator>
   );
 };

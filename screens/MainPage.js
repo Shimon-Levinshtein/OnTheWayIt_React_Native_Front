@@ -15,7 +15,7 @@ const PlacesListScreen = props => {
     if(places.connected) {
       console.log('connected!!!');
     } else {
-      props.navigation.navigate('LoginOrSignUp');
+      props.navigation.navigate('Drivers', { screen: 'LoginOrSignUp' });
     }
   };
 

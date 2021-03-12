@@ -1,12 +1,14 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import React, { useState, } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, SectionList } from 'react-native';
+import RNPickerSelect from "react-native-picker-select";
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, } from 'react-native-elements';
 
 import Colors from '../../../constants/Colors';
 
 
 const StepA = props => {
+
+    const [genderSeledt, setGenderSeledt] = useState('');
 
     const handlerNextLevel = () => {
         //   props.navigation.navigate('xxx');
@@ -25,8 +27,22 @@ const StepA = props => {
 
 
             <View style={styles.containingInputs}>
-                <Input label='שם' style={styles.containingInputs} />
+                <Text style={styles.labelTextImput}>שם</Text>
+                <TextInput style={styles.input} />
+                <Text style={styles.labelTextImput}>מין</Text>
+                <View style={styles.inputSelect} >
+                    <Text style={styles.inputSelectText}>{genderSeledt}</Text>
+                    <View style={styles.inputSelectArrow}>
+                        <RNPickerSelect
+                            onValueChange={(value) => setGenderSeledt(value)}
+                            items={[{ label: "זכר", value: "זכר" }, { label: "נקבה", value: "נקבה" },]}
+                        />
+                    </View>
+                </View>
+                <Text style={styles.labelTextImput}>גיל</Text>
+                <TextInput style={styles.input} />
             </View>
+
             <View style={styles.containingButton}>
                 <TouchableOpacity style={styles.button} onPress={() => handlerNextLevel()}>
                     <Text style={styles.textButton}>שלב הבא</Text>
@@ -74,10 +90,47 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
     containingInputs: {
-        color: Colors.primary
+        color: Colors.primary,
+        marginRight: '5%',
+        marginLeft: '5%',
+        width: '100%',
+
+    },
+    labelTextImput: {
+        color: Colors.primary,
+        fontWeight: 'bold',
+        fontSize: 18,
     },
     input: {
+        color: Colors.primary,
         borderColor: Colors.primary,
+        height: 40,
+        width: "90%",
+        borderWidth: 1,
+        marginBottom: 20,
+        borderRadius: 10,
+        fontSize: 18,
+        padding: 7,
+    },
+    inputSelect: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        color: Colors.primary,
+        borderColor: Colors.primary,
+        height: 40,
+        width: "90%",
+        borderWidth: 1,
+        borderRadius: 10,
+        marginBottom: 15,
+    },
+    inputSelectText: {
+        color: Colors.primary,
+        fontSize: 18,
+        padding: 7,
+        width: '80%',
+    },
+    inputSelectArrow: {
+        width: '15%',
     },
     containingButton: {
         height: '15%',
