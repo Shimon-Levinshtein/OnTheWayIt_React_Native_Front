@@ -1,3 +1,4 @@
 export default {
-    primary: '#00a9ff'
+    primary: '#00a9ff',
+    primaryLight: '#e2f1f5',
 }

@@ -11,6 +11,7 @@ import Colors from '../constants/Colors';
 import MainPage from '../screens/MainPage';
 import LoginOrSignUp from '../screens/Drivers/LoginOrSignUp';
 import StepA from '../screens/Drivers/CreateAccount/StepA';
+import StepB from '../screens/Drivers/CreateAccount/StepB';
 
 
 const Drawer = createDrawerNavigator();
@@ -60,6 +61,7 @@ const LoginOrSignUpDriver = () => {
         <Stack.Navigator screenOptions={menuScreenOptions}>
             <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp} options={{title: ''}} />
             <Stack.Screen name="StepA" component={StepA} options={{title: ''}} />
+            <Stack.Screen name="StepB" component={StepB} options={{title: ''}} />
         </Stack.Navigator>
     );
 };
