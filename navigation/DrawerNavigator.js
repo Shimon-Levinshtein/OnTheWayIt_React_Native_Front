@@ -12,6 +12,8 @@ import MainPage from '../screens/MainPage';
 import LoginOrSignUp from '../screens/Drivers/LoginOrSignUp';
 import StepA from '../screens/Drivers/CreateAccount/StepA';
 import StepB from '../screens/Drivers/CreateAccount/StepB';
+import StepC from '../screens/Drivers/CreateAccount/StepC';
+import StepD from '../screens/Drivers/CreateAccount/StepD';
 
 
 const Drawer = createDrawerNavigator();
@@ -62,6 +64,8 @@ const LoginOrSignUpDriver = () => {
             <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp} options={{title: ''}} />
             <Stack.Screen name="StepA" component={StepA} options={{title: ''}} />
             <Stack.Screen name="StepB" component={StepB} options={{title: ''}} />
+            <Stack.Screen name="StepC" component={StepC} options={{title: ''}} />
+            <Stack.Screen name="StepD" component={StepD} options={{title: ''}} />
         </Stack.Navigator>
     );
 };
