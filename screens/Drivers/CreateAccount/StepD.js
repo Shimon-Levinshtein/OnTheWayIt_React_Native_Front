@@ -1,28 +1,56 @@
 import React, { useState, } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Button } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import { useSelector, useDispatch } from 'react-redux';
 import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import DatePicker from 'react-native-datepicker';
 import { TimePicker } from 'react-native-simple-time-picker';
-// import DateTimePicker from '@react-native-community/datetimepicker';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Colors from '../../../constants/Colors';
 
 const StepD = props => {
 
     const [desiredDelivery, setDesiredDelivery] = useState([]);
+    // const [date, setDate] = useState(new Date());
+    // const [hours, setHours] = React.useState(0);
+    // const [minutes, setMinutes] = React.useState(0);
+    // const handleChange = (event, date) => {
+    //     console.log(event);
+    //     console.log(date);
+    // //   setHours(value.hours);
+    // //   setMinutes(value.minutes);
+    // };
+
     const [date, setDate] = useState(new Date());
-    const [hours, setHours] = React.useState(0);
-    const [minutes, setMinutes] = React.useState(0);
-    const handleChange = (event, date) => {
-        console.log(event);
-        console.log(date);
-    //   setHours(value.hours);
-    //   setMinutes(value.minutes);
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        console.log('onChange',{
+            mode,
+            show,
+        });
+        const currentDate = selectedDate || date;
+        setShow(false);
+        //   setShow(Platform.OS === 'ios');
+        setDate(currentDate);
     };
-    
+
+    const showMode = (currentMode) => {
+
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
+
 
     const handlerNextLevel = () => {
         //   props.navigation.navigate('StepD');
@@ -79,7 +107,7 @@ const StepD = props => {
                     <Text style={styles.departureTimeBoldText}>זמן יציאה</Text>
                     <Text style={styles.departureTimeText}>* אופציונלי</Text>
                 </View>
-                <View style={styles.containerDatePicker}>
+                {/* <View style={styles.containerDatePicker}>
                     <DatePicker
                         style={styles.datePickerStyle}
                         date={date} // Initial date from state
@@ -109,21 +137,25 @@ const StepD = props => {
                         }}
                         onDateChange={(date) => { setDate(date) }}
                     />
-                    <View >
-                        <Text>
-                            Selected Time: {hours}:{minutes}
-                        </Text>
-                        {/* <TimePicker value={{hours, minutes}} onChange={handleChange} /> */}
-                        <RNDateTimePicker mode="time" value={new Date()} onChange={handleChange}/>
-                        {/* <TimePicker
-                            selectedHours={selectedHours}
-                            selectedMinutes={selectedMinutes}
-                            onChange={(hours, minutes) => {
-                                setSelectedHours(hours);
-                                setSelectedMinutes(minutes);
-                            }}
-                        /> */}
+                </View> */}
+                <View>
+                    <Text>{date.toString()}</Text>
+                    <View>
+                        <Button onPress={showDatepicker} title="Show date picker!" />
                     </View>
+                    <View>
+                        <Button onPress={showTimepicker} title="Show time picker!" />
+                    </View>
+                    {show && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode={mode}
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
                 </View>
 
                 <View style={styles.containingButton}>
