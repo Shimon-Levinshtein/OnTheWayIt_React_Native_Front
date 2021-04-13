@@ -2,15 +2,27 @@ import React, { useState, } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import { useSelector, useDispatch } from 'react-redux';
-import { Entypo } from '@expo/vector-icons';
-
+import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import DatePicker from 'react-native-datepicker';
+import { TimePicker } from 'react-native-simple-time-picker';
+// import DateTimePicker from '@react-native-community/datetimepicker';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 import Colors from '../../../constants/Colors';
-
 
 const StepD = props => {
 
     const [desiredDelivery, setDesiredDelivery] = useState([]);
+    const [date, setDate] = useState(new Date());
+    const [hours, setHours] = React.useState(0);
+    const [minutes, setMinutes] = React.useState(0);
+    const handleChange = (event, date) => {
+        console.log(event);
+        console.log(date);
+    //   setHours(value.hours);
+    //   setMinutes(value.minutes);
+    };
+    
 
     const handlerNextLevel = () => {
         //   props.navigation.navigate('StepD');
@@ -53,6 +65,65 @@ const StepD = props => {
                         <Text style={styles.labelTextImput}>נקודת סיום</Text>
                     </View>
                     <TextInput keyboardType='numeric' style={styles.input} />
+                </View>
+
+                <TouchableOpacity style={styles.buttonCounterRoute}>
+                    <Ionicons name="swap-vertical" size={24} color={Colors.primary} />
+                    <Text style={styles.buttonCounterRouteText}>הוספת מסלול נגדי</Text>
+                </TouchableOpacity>
+
+                <View style={styles.boundaryLine}></View>
+
+                <View style={styles.departureTimeContiner}>
+                    <MaterialIcons name="watch-later" size={24} color={Colors.primary} />
+                    <Text style={styles.departureTimeBoldText}>זמן יציאה</Text>
+                    <Text style={styles.departureTimeText}>* אופציונלי</Text>
+                </View>
+                <View style={styles.containerDatePicker}>
+                    <DatePicker
+                        style={styles.datePickerStyle}
+                        date={date} // Initial date from state
+                        mode="date" // The enum of date, datetime and time
+                        placeholder="select date"
+                        format="DD-MM-YYYY"
+                        minDate={new Date()}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                            dateIcon: {
+                                display: 'none',
+                                position: 'absolute',
+                                left: 0,
+                                marginLeft: 0,
+                                bottom: 13
+                            },
+                            dateInput: {
+                                borderWidth: 0,
+                                marginBottom: 16,
+                            },
+                            dateText: {
+                                fontSize: 15,
+                                color: Colors.primary,
+                                textAlign: "left"
+                            }
+                        }}
+                        onDateChange={(date) => { setDate(date) }}
+                    />
+                    <View >
+                        <Text>
+                            Selected Time: {hours}:{minutes}
+                        </Text>
+                        {/* <TimePicker value={{hours, minutes}} onChange={handleChange} /> */}
+                        <RNDateTimePicker mode="time" value={new Date()} onChange={handleChange}/>
+                        {/* <TimePicker
+                            selectedHours={selectedHours}
+                            selectedMinutes={selectedMinutes}
+                            onChange={(hours, minutes) => {
+                                setSelectedHours(hours);
+                                setSelectedMinutes(minutes);
+                            }}
+                        /> */}
+                    </View>
                 </View>
 
                 <View style={styles.containingButton}>
@@ -153,6 +224,62 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingBottom: 20,
     },
+    buttonCounterRoute: {
+        height: 40,
+        marginHorizontal: '8%',
+        backgroundColor: Colors.primaryLight,
+        flexDirection: 'row',
+        alignContent: 'flex-end',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonCounterRouteText: {
+        color: Colors.primary,
+        fontWeight: 'bold',
+        marginHorizontal: 10,
+    },
+    boundaryLine: {
+        backgroundColor: Colors.primaryLight,
+        marginHorizontal: '8%',
+        height: 2,
+        marginVertical: 20,
+    },
+    departureTimeContiner: {
+        marginHorizontal: '8%',
+        flexDirection: 'row',
+        alignContent: 'flex-end',
+        height: 40,
+        alignItems: 'center',
+    },
+    departureTimeBoldText: {
+        color: Colors.primary,
+        fontWeight: 'bold',
+        marginLeft: 10,
+    },
+    departureTimeText: {
+        color: Colors.primary,
+        marginHorizontal: 10,
+        fontSize: 12,
+    },
+    containerDatePicker: {
+        marginHorizontal: '8%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    datePickerStyle: {
+        width: 200,
+        marginTop: 20,
+        color: Colors.primary,
+        borderColor: Colors.primary,
+        height: 40,
+        borderWidth: 1,
+        marginBottom: 20,
+        borderRadius: 10,
+        fontSize: 18,
+        padding: 7,
+        textAlign: 'right',
+    },
     button: {
         backgroundColor: 'white',
         width: '90%',
@@ -173,6 +300,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    // ***************************
+
 });
 
 export default StepD;

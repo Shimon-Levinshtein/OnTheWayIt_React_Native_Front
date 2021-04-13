@@ -13,7 +13,6 @@ const StepC = props => {
     const handlerNextLevel = () => {
           props.navigation.navigate('StepD');
     };
-
     const desiredDeliveryButton = (buttonNeme) => {
         if (desiredDelivery.includes(buttonNeme)) {
             const index = desiredDelivery.indexOf(buttonNeme);
@@ -23,7 +22,6 @@ const StepC = props => {
         } else {
             setDesiredDelivery([...[buttonNeme], ...desiredDelivery]);
         };
-        console.log(desiredDelivery);
     };
     return (
         <ScrollView>
