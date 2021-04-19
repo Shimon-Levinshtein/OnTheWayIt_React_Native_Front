@@ -1,59 +1,34 @@
 import React, { useState, } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Switch } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import { useSelector, useDispatch } from 'react-redux';
 import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import DatePicker from 'react-native-datepicker';
-import { TimePicker } from 'react-native-simple-time-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Colors from '../../../constants/Colors';
 
 const StepD = props => {
 
+    const dataNow = new Date();
+
     const [desiredDelivery, setDesiredDelivery] = useState([]);
-    // const [date, setDate] = useState(new Date());
-    // const [hours, setHours] = React.useState(0);
-    // const [minutes, setMinutes] = React.useState(0);
-    // const handleChange = (event, date) => {
-    //     console.log(event);
-    //     console.log(date);
-    // //   setHours(value.hours);
-    // //   setMinutes(value.minutes);
-    // };
-
     const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
+    const [hour, setHour] = useState(new Date());
+    const [hourDisplay, setHourDisplay] = useState(("0" + dataNow.getHours()).slice(-2) + ":" + ("0" + dataNow.getMinutes()).slice(-2));
     const [show, setShow] = useState(false);
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-    const onChange = (event, selectedDate) => {
-        console.log('onChange',{
-            mode,
-            show,
-        });
-        const currentDate = selectedDate || date;
+    const onChangeHour = (event, selectedDate) => {
         setShow(false);
-        //   setShow(Platform.OS === 'ios');
-        setDate(currentDate);
+        setHour(selectedDate);
+        setHourDisplay(("0" + selectedDate.getHours()).slice(-2) + ":" + ("0" + selectedDate.getMinutes()).slice(-2));
+
     };
-
-    const showMode = (currentMode) => {
-
-        setShow(true);
-        setMode(currentMode);
-    };
-
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
-    };
-
 
     const handlerNextLevel = () => {
-        //   props.navigation.navigate('StepD');
+          props.navigation.navigate('StepE');
     };
 
     const desiredDeliveryButton = (buttonNeme) => {
@@ -107,7 +82,7 @@ const StepD = props => {
                     <Text style={styles.departureTimeBoldText}>זמן יציאה</Text>
                     <Text style={styles.departureTimeText}>* אופציונלי</Text>
                 </View>
-                {/* <View style={styles.containerDatePicker}>
+                <View style={styles.containerDatePicker}>
                     <DatePicker
                         style={styles.datePickerStyle}
                         date={date} // Initial date from state
@@ -137,26 +112,37 @@ const StepD = props => {
                         }}
                         onDateChange={(date) => { setDate(date) }}
                     />
-                </View> */}
-                <View>
-                    <Text>{date.toString()}</Text>
-                    <View>
-                        <Button onPress={showDatepicker} title="Show date picker!" />
-                    </View>
-                    <View>
-                        <Button onPress={showTimepicker} title="Show time picker!" />
-                    </View>
-                    {show && (
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={date}
-                            mode={mode}
-                            is24Hour={true}
-                            display="default"
-                            onChange={onChange}
-                        />
-                    )}
+                    <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShow(true)}>
+                        <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
+                        <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
+                        {show && (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={hour}
+                                mode='time'
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChangeHour}
+                            />
+                        )}
+                    </TouchableOpacity>
                 </View>
+
+                <View style={styles.departureTimeContiner}>
+                    <Text style={styles.departureTimeBoldText}>הגדר זמן משוער או מדוייק</Text>
+                    <Switch
+                        trackColor={{ false: '#DCDCDC', true: Colors.primaryLight }}
+                        thumbColor={isEnabled ? Colors.primary : Colors.primaryLight}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
+                    <Text style={styles.departureTimeBoldText}>{'מדוייק'}</Text>
+                </View>
+
+                <TouchableOpacity style={styles.addRoute}>
+                    <Text style={styles.textAddRoute}>+ הוסף מסלול נוסף</Text>
+                </TouchableOpacity>
 
                 <View style={styles.containingButton}>
                     <TouchableOpacity style={styles.button} onPress={() => handlerNextLevel()}>
@@ -284,6 +270,17 @@ const styles = StyleSheet.create({
         height: 40,
         alignItems: 'center',
     },
+    addRoute: {
+        paddingHorizontal: '8%',
+        height: 50,
+        justifyContent: 'center',
+    },
+    textAddRoute: {
+        textAlign:'left',
+        color: Colors.primary,
+        fontSize: 16,
+        textDecorationLine: 'underline',
+    },
     departureTimeBoldText: {
         color: Colors.primary,
         fontWeight: 'bold',
@@ -300,7 +297,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     datePickerStyle: {
-        width: 200,
+        width: '65%',
         marginTop: 20,
         color: Colors.primary,
         borderColor: Colors.primary,
@@ -311,6 +308,25 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 7,
         textAlign: 'right',
+    },
+    hourPickerStyle: {
+        width: '30%',
+        marginTop: 20,
+        color: Colors.primary,
+        borderColor: Colors.primary,
+        height: 40,
+        borderWidth: 1,
+        marginBottom: 20,
+        borderRadius: 10,
+        padding: 7,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    hourTextStyle: {
+        fontSize: 15,
+        color: Colors.primary,
+        marginLeft: "15%"
     },
     button: {
         backgroundColor: 'white',
@@ -332,8 +348,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    // ***************************
-
 });
 
 export default StepD;

@@ -22,9 +22,9 @@ const StepA = props => {
                     <Text style={styles.titelText}>הוספת פרטים אישיים</Text>
                     <Text style={styles.text}> שלב 1/7</Text>
                 </View>
-                <View style={styles.loginQuestion}>
+                <TouchableOpacity style={styles.loginQuestion}>
                     <Text style={styles.textLoginQuestion}>כבר רשום? התחבר</Text>
-                </View>
+                </TouchableOpacity>
 
 
                 <View style={styles.containingInputs}>
