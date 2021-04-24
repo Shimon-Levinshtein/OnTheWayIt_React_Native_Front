@@ -17,6 +17,7 @@ import StepD from '../screens/Drivers/CreateAccount/StepD';
 import StepE from '../screens/Drivers/CreateAccount/StepE';
 import StepF from '../screens/Drivers/CreateAccount/StepF';
 import StepG from '../screens/Drivers/CreateAccount/StepG';
+import StepH from '../screens/Drivers/CreateAccount/StepH';
 
 
 const Drawer = createDrawerNavigator();
@@ -72,6 +73,7 @@ const LoginOrSignUpDriver = () => {
             <Stack.Screen name="StepE" component={StepE} options={{title: ''}} />
             <Stack.Screen name="StepF" component={StepF} options={{title: ''}} />
             <Stack.Screen name="StepG" component={StepG} options={{title: ''}} />
+            <Stack.Screen name="StepH" component={StepH} options={{title: ''}} />
         </Stack.Navigator>
     );
 };
@@ -80,7 +82,7 @@ const LoginOrSignUpDriver = () => {
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerPosition='right' drawerType='front'>
-      <Drawer.Screen name="עמוד ראשי" component={HomeStack} />
+      <Drawer.Screen name="HomePage" component={HomeStack} />
       <Drawer.Screen name="Drivers" component={LoginOrSignUpDriver} options={{title: 'Bנהגים'}} />
     </Drawer.Navigator>
   );

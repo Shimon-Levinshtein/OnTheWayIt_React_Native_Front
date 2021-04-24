@@ -24,7 +24,7 @@ const StepC = props => {
         };
     };
     return (
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
             <View style={styles.continer}>
                 <View style={styles.containingTitelText}>
                     <Text style={styles.titelText}>בחירת סוג משלוחים רצוי</Text>
@@ -97,6 +97,9 @@ const StepC = props => {
 
 
 const styles = StyleSheet.create({
+    scrollView: {
+        backgroundColor: 'white',
+    },
     continer: {
         backgroundColor: 'white',
         height: '100%',

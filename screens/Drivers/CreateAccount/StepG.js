@@ -9,7 +9,7 @@ const StepG = props => {
     const [isSelected, setSelection] = useState(false);
 
     const handlerNextLevel = () => {
-        // props.navigation.navigate('StepH');
+        props.navigation.navigate('StepH');
     };
 
     const onChangeCheckBox = () => {
@@ -17,7 +17,7 @@ const StepG = props => {
     };
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
             <View style={styles.continer}>
                 <View style={styles.containingTitelText}>
                     <Text style={styles.titelText}>תנאי שימוש וסיום הרשמה</Text>
@@ -54,6 +54,9 @@ const StepG = props => {
 
 
 const styles = StyleSheet.create({
+    scrollView: {
+        backgroundColor: 'white',
+    },
     continer: {
         backgroundColor: 'white',
         height: '100%',
