@@ -9,7 +9,7 @@ const StepG = props => {
     const [isSelected, setSelection] = useState(false);
 
     const handlerNextLevel = () => {
-        props.navigation.navigate('StepH');
+        props.navigation.navigate('CreateAccountStepH');
     };
 
     const onChangeCheckBox = () => {

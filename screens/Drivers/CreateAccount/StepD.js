@@ -1,9 +1,9 @@
 import React, { useState, } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Switch } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Switch, Button } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import { useSelector, useDispatch } from 'react-redux';
-import { Entypo, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import DatePicker from 'react-native-datepicker';
+import { Entypo, Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
+// import DatePicker from 'react-native-datepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Colors from '../../../constants/Colors';
@@ -12,23 +12,31 @@ const StepD = props => {
 
     const dataNow = new Date();
 
-    const [desiredDelivery, setDesiredDelivery] = useState([]);
+    const [showDate, setShowDate] = useState(false);
     const [date, setDate] = useState(new Date());
+    const [desiredDelivery, setDesiredDelivery] = useState([]);
     const [hour, setHour] = useState(new Date());
     const [hourDisplay, setHourDisplay] = useState(("0" + dataNow.getHours()).slice(-2) + ":" + ("0" + dataNow.getMinutes()).slice(-2));
-    const [show, setShow] = useState(false);
+    const [showTime, setShowTime] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+    const onChangeDate = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        // setShowDate(Platform.OS === 'ios');
+        setShowDate(false);
+        setDate(currentDate);
+    };
+
     const onChangeHour = (event, selectedDate) => {
-        setShow(false);
+        setShowTime(false);
         setHour(selectedDate);
         setHourDisplay(("0" + selectedDate.getHours()).slice(-2) + ":" + ("0" + selectedDate.getMinutes()).slice(-2));
 
     };
 
     const handlerNextLevel = () => {
-          props.navigation.navigate('StepE');
+        props.navigation.navigate('CreateAccountStepE');
     };
 
     const desiredDeliveryButton = (buttonNeme) => {
@@ -40,7 +48,6 @@ const StepD = props => {
         } else {
             setDesiredDelivery([...[buttonNeme], ...desiredDelivery]);
         };
-        console.log(desiredDelivery);
     };
     return (
         <ScrollView>
@@ -83,7 +90,7 @@ const StepD = props => {
                     <Text style={styles.departureTimeText}>* אופציונלי</Text>
                 </View>
                 <View style={styles.containerDatePicker}>
-                    <DatePicker
+                    {/* <DatePicker
                         style={styles.datePickerStyle}
                         date={date} // Initial date from state
                         mode="date" // The enum of date, datetime and time
@@ -111,11 +118,26 @@ const StepD = props => {
                             }
                         }}
                         onDateChange={(date) => { setDate(date) }}
-                    />
-                    <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShow(true)}>
+                    /> */}
+                    
+                    <TouchableOpacity style={styles.datePickerStyle} onPress={() => setShowDate(true)}>
+                        <Text style={styles.dateTextStyle}>{date+""}</Text>
+                        <AntDesign name="calendar" size={24} color={Colors.primary} />
+                        {showTime && (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={date}
+                                mode='date'
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChangeDate}
+                            />
+                        )}
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTime(true)}>
                         <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
                         <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
-                        {show && (
+                        {showTime && (
                             <DateTimePicker
                                 testID="dateTimePicker"
                                 value={hour}
@@ -276,7 +298,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textAddRoute: {
-        textAlign:'left',
+        textAlign: 'left',
         color: Colors.primary,
         fontSize: 16,
         textDecorationLine: 'underline',
@@ -296,6 +318,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    // datePickerStyle: {
+    //     width: '65%',
+    //     marginTop: 20,
+    //     color: Colors.primary,
+    //     borderColor: Colors.primary,
+    //     height: 40,
+    //     borderWidth: 1,
+    //     marginBottom: 20,
+    //     borderRadius: 10,
+    //     fontSize: 18,
+    //     padding: 7,
+    //     textAlign: 'right',
+    // },
     datePickerStyle: {
         width: '65%',
         marginTop: 20,
@@ -305,9 +340,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 20,
         borderRadius: 10,
-        fontSize: 18,
         padding: 7,
-        textAlign: 'right',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    dateTextStyle: {
+        fontSize: 15,
+        color: Colors.primary,
+        marginLeft: "15%"
     },
     hourPickerStyle: {
         width: '30%',

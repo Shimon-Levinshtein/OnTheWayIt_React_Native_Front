@@ -11,7 +11,7 @@ const StepC = props => {
     const [desiredDelivery, setDesiredDelivery] = useState([]);
 
     const handlerNextLevel = () => {
-          props.navigation.navigate('StepD');
+          props.navigation.navigate('CreateAccountStepD');
     };
     const desiredDeliveryButton = (buttonNeme) => {
         if (desiredDelivery.includes(buttonNeme)) {

@@ -9,15 +9,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Colors from '../constants/Colors';
 
 import MainPage from '../screens/MainPage';
+
 import LoginOrSignUp from '../screens/Drivers/LoginOrSignUp';
-import StepA from '../screens/Drivers/CreateAccount/StepA';
-import StepB from '../screens/Drivers/CreateAccount/StepB';
-import StepC from '../screens/Drivers/CreateAccount/StepC';
-import StepD from '../screens/Drivers/CreateAccount/StepD';
-import StepE from '../screens/Drivers/CreateAccount/StepE';
-import StepF from '../screens/Drivers/CreateAccount/StepF';
-import StepG from '../screens/Drivers/CreateAccount/StepG';
-import StepH from '../screens/Drivers/CreateAccount/StepH';
+import CreateAccountStepA from '../screens/Drivers/CreateAccount/StepA';
+import CreateAccountStepB from '../screens/Drivers/CreateAccount/StepB';
+import CreateAccountStepC from '../screens/Drivers/CreateAccount/StepC';
+import CreateAccountStepD from '../screens/Drivers/CreateAccount/StepD';
+import CreateAccountStepE from '../screens/Drivers/CreateAccount/StepE';
+import CreateAccountStepF from '../screens/Drivers/CreateAccount/StepF';
+import CreateAccountStepG from '../screens/Drivers/CreateAccount/StepG';
+import CreateAccountStepH from '../screens/Drivers/CreateAccount/StepH';
+
+import LoginDriver from '../screens/Drivers/Login/StepA';
+
+import AddingRouteDriverStepA from '../screens/Drivers/AddingRoute/StepA';
 
 
 const Drawer = createDrawerNavigator();
@@ -66,14 +71,23 @@ const LoginOrSignUpDriver = () => {
     return (
         <Stack.Navigator screenOptions={menuScreenOptions}>
             <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp} options={{title: ''}} />
-            <Stack.Screen name="StepA" component={StepA} options={{title: ''}} />
-            <Stack.Screen name="StepB" component={StepB} options={{title: ''}} />
-            <Stack.Screen name="StepC" component={StepC} options={{title: ''}} />
-            <Stack.Screen name="StepD" component={StepD} options={{title: ''}} />
-            <Stack.Screen name="StepE" component={StepE} options={{title: ''}} />
-            <Stack.Screen name="StepF" component={StepF} options={{title: ''}} />
-            <Stack.Screen name="StepG" component={StepG} options={{title: ''}} />
-            <Stack.Screen name="StepH" component={StepH} options={{title: ''}} />
+            <Stack.Screen name="LoginDriver" component={LoginDriver} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepA" component={CreateAccountStepA} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepB" component={CreateAccountStepB} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepC" component={CreateAccountStepC} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepD" component={CreateAccountStepD} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepE" component={CreateAccountStepE} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepF" component={CreateAccountStepF} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepG" component={CreateAccountStepG} options={{title: ''}} />
+            <Stack.Screen name="CreateAccountStepH" component={CreateAccountStepH} options={{title: ''}} />
+        </Stack.Navigator>
+    );
+};
+
+const AddingRouteDriver = () => {
+    return (
+        <Stack.Navigator screenOptions={menuScreenOptions}>
+            <Stack.Screen name="AddingRouteDriverStepA" component={AddingRouteDriverStepA} options={{title: ''}} />
         </Stack.Navigator>
     );
 };
@@ -83,7 +97,8 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerPosition='right' drawerType='front'>
       <Drawer.Screen name="HomePage" component={HomeStack} />
-      <Drawer.Screen name="Drivers" component={LoginOrSignUpDriver} options={{title: 'Bנהגים'}} />
+      <Drawer.Screen name="Drivers" component={LoginOrSignUpDriver} options={{title: 'Login Or SignUp Driver'}} />
+      <Drawer.Screen name="AddingRouteDriver" component={AddingRouteDriver} options={{title: 'Adding Route Driver'}} />
     </Drawer.Navigator>
   );
 };

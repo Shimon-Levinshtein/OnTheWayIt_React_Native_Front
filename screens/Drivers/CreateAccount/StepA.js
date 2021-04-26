@@ -11,7 +11,11 @@ const StepA = props => {
     const [genderSeledt, setGenderSeledt] = useState('');
 
     const handlerNextLevel = () => {
-        props.navigation.navigate('StepB');
+        props.navigation.navigate('CreateAccountStepB');
+    };
+
+    const handlerLogin = () => {
+        props.navigation.navigate('LoginDriver');
     };
 
 
@@ -22,7 +26,7 @@ const StepA = props => {
                     <Text style={styles.titelText}>הוספת פרטים אישיים</Text>
                     <Text style={styles.text}> שלב 1/7</Text>
                 </View>
-                <TouchableOpacity style={styles.loginQuestion}>
+                <TouchableOpacity style={styles.loginQuestion} onPress={() => handlerLogin()}>
                     <Text style={styles.textLoginQuestion}>כבר רשום? התחבר</Text>
                 </TouchableOpacity>
 

@@ -13,7 +13,7 @@ const StepB = props => {
     const [thereArePassengers, setThereArePassengers] = useState(true);
 
     const handlerNextLevel = () => {
-          props.navigation.navigate('StepC');
+          props.navigation.navigate('CreateAccountStepC');
     };
 
     const handlerTransportButton = (buttonNeme, passengersNum, thereAre) => {

@@ -10,11 +10,11 @@ const LoginOrSignUp = props => {
 //   const dispatch = useDispatch();
 
   const handlerLoginButton = () => {
-    //   props.navigation.navigate('XXX');
+      props.navigation.navigate('LoginDriver');
   };
 
   const handlerSignUpButton = () => {
-      props.navigation.navigate('StepA');
+      props.navigation.navigate('CreateAccountStepA');
   };
 
   return (

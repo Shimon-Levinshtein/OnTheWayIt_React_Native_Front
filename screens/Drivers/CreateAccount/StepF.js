@@ -6,7 +6,7 @@ import Colors from '../../../constants/Colors';
 const StepF = props => {
 
     const handlerNextLevel = () => {
-        props.navigation.navigate('StepG');
+        props.navigation.navigate('CreateAccountStepG');
     };
 
     return (
