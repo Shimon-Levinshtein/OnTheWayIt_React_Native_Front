@@ -23,6 +23,8 @@ import CreateAccountStepH from '../screens/Drivers/CreateAccount/StepH';
 import LoginDriver from '../screens/Drivers/Login/StepA';
 
 import AddingRouteDriverStepA from '../screens/Drivers/AddingRoute/StepA';
+import AddingRouteDriverStepB from '../screens/Drivers/AddingRoute/StepB/StepB';
+// import AddingRouteDriverStepC from '../screens/Drivers/AddingRoute/StepC';
 
 
 const Drawer = createDrawerNavigator();
@@ -88,6 +90,8 @@ const AddingRouteDriver = () => {
     return (
         <Stack.Navigator screenOptions={menuScreenOptions}>
             <Stack.Screen name="AddingRouteDriverStepA" component={AddingRouteDriverStepA} options={{title: ''}} />
+            <Stack.Screen name="AddingRouteDriverStepB" component={AddingRouteDriverStepB} options={{title: ''}} />
+            {/* <Stack.Screen name="AddingRouteDriverStepC" component={AddingRouteDriverStepC} options={{title: ''}} /> */}
         </Stack.Navigator>
     );
 };

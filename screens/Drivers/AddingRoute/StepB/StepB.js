@@ -4,9 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Entypo, Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import Colors from '../../../constants/Colors';
+import Colors from '../../../../constants/Colors';
 
-const StepD = props => {
+import TabA from './Tabs/TabA';
+import TabB from './Tabs/TabB';
+
+const StepB = props => {
+
+    const [tabADisplay, setTabADisplay] = useState(true);
+    const [tabBDisplay, setTabBDisplay] = useState(false);
 
     const dataNow = new Date();
     const [showDate, setShowDate] = useState(false);
@@ -33,7 +39,15 @@ const StepD = props => {
     };
 
     const handlerNextLevel = () => {
-        props.navigation.navigate('CreateAccountStepE');
+        // props.navigation.navigate('xxx');
+    };
+    const handlerTabBButton = () => {
+        setTabADisplay(false);
+        setTabBDisplay(true)
+    };
+    const handlerTabAButton = () => {
+        setTabBDisplay(false)
+        setTabADisplay(true);
     };
 
     const desiredDeliveryButton = (buttonNeme) => {
@@ -50,88 +64,25 @@ const StepD = props => {
         <ScrollView>
             <View style={styles.continer}>
                 <View style={styles.containingTitelText}>
-                    <Text style={styles.titelText}>הוספת מסלול נסיעה קבוע</Text>
-                    <Text style={styles.text}> שלב 4/7</Text>
+                    <Text style={styles.titelText}>מה מסלול הנסיעה שלך</Text>
+                    {/* <Text style={styles.text}> שלב 4/7</Text> */}
                 </View>
 
-                <View style={styles.skipStepContiner}>
-                    <Text style={styles.skipStepText}>אם אין לך מסלול נסיעה קבוע תוכל לדלג על עמוד זה</Text>
-                    <TouchableOpacity style={styles.buttonSkipStep} onPress={() => handlerNextLevel()}>
-                        <Text style={styles.textButtonSkipStep}>דילוג</Text>
+                <View style={styles.containingTabButtons}>
+                    <TouchableOpacity
+                        style={tabADisplay ? styles.buttonTabActive : styles.buttonTab}
+                        onPress={() => handlerTabAButton()}>
+                        <Text style={styles.buttonTabText}>מסלול חדש</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={tabBDisplay ? styles.buttonTabActive : styles.buttonTab}
+                        onPress={() => handlerTabBButton()}>
+                        <Text style={styles.buttonTabText}>המסלול הקבוע שלי</Text>
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.containingInputs}>
-                    <View style={styles.labelTextImputContiner}>
-                        <Entypo name="location-pin" size={24} color={Colors.primary} />
-                        <Text style={styles.labelTextImput}>נקודת יציאה</Text>
-                    </View>
-                    <TextInput style={styles.input} />
-                    <View style={styles.labelTextImputContiner}>
-                        <Entypo name="location-pin" size={24} color={Colors.primary} />
-                        <Text style={styles.labelTextImput}>נקודת סיום</Text>
-                    </View>
-                    <TextInput keyboardType='numeric' style={styles.input} />
-                </View>
-
-                <TouchableOpacity style={styles.buttonCounterRoute}>
-                    <Ionicons name="swap-vertical" size={24} color={Colors.primary} />
-                    <Text style={styles.buttonCounterRouteText}>הוספת מסלול נגדי</Text>
-                </TouchableOpacity>
-
-                <View style={styles.boundaryLine}></View>
-
-                <View style={styles.departureTimeContiner}>
-                    <MaterialIcons name="watch-later" size={24} color={Colors.primary} />
-                    <Text style={styles.departureTimeBoldText}>זמן יציאה</Text>
-                    <Text style={styles.departureTimeText}>* אופציונלי</Text>
-                </View>
-                <View style={styles.containerDatePicker}>
-                    <TouchableOpacity style={styles.datePickerStyle} onPress={() => setShowDate(true)}>
-                        <Text style={styles.dateTextStyle}>{dateDisplay}</Text>
-                        <AntDesign name="calendar" size={24} color={Colors.primary} />
-                        {showDate && (
-                            <DateTimePicker
-                                testID="dateTimePicker"
-                                value={date}
-                                mode='date'
-                                is24Hour={true}
-                                display="default"
-                                onChange={onChangeDate}
-                            />
-                        )}
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTime(true)}>
-                        <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
-                        <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
-                        {showTime && (
-                            <DateTimePicker
-                                testID="dateTimePicker"
-                                value={hour}
-                                mode='time'
-                                is24Hour={true}
-                                display="default"
-                                onChange={onChangeHour}
-                            />
-                        )}
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.departureTimeContiner}>
-                    <Text style={styles.departureTimeBoldText}>הגדר זמן משוער או מדוייק</Text>
-                    <Switch
-                        trackColor={{ false: '#DCDCDC', true: Colors.primaryLight }}
-                        thumbColor={isEnabled ? Colors.primary : Colors.primaryLight}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                    <Text style={styles.departureTimeBoldText}>{'מדוייק'}</Text>
-                </View>
-
-                <TouchableOpacity style={styles.addRoute}>
-                    <Text style={styles.textAddRoute}>+ הוסף מסלול נוסף</Text>
-                </TouchableOpacity>
+                {tabADisplay && <TabA />}
+                {tabBDisplay && <TabB />}
 
                 <View style={styles.containingButton}>
                     <TouchableOpacity style={styles.button} onPress={() => handlerNextLevel()}>
@@ -162,7 +113,31 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 8,
-
+    },
+    containingTabButtons: {
+        backgroundColor: Colors.primary,
+        fontSize: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: 25,
+    },
+    buttonTab: {
+        width: '50%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonTabActive: {
+        backgroundColor: Colors.primaryActive,
+        width: '50%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonTabText: {
+        color: 'white',
+        fontSize: 15,
+        fontWeight: 'bold',
     },
     text: {
         color: 'white',
@@ -170,30 +145,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginHorizontal: '10%',
         marginTop: 8
-    },
-    skipStepContiner: {
-        marginHorizontal: '7%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 20,
-    },
-    skipStepText: {
-        color: Colors.primary,
-        width: '55%',
-    },
-    buttonSkipStep: {
-        backgroundColor: Colors.primary,
-        width: '30%',
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-    },
-    textButtonSkipStep: {
-        alignItems: 'center',
-        color: 'white',
-        textAlign: 'center',
     },
     containingInputs: {
         color: Colors.primary,
@@ -345,4 +296,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default StepD;
+export default StepB;
