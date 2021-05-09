@@ -39,7 +39,7 @@ const StepB = props => {
     };
 
     const handlerNextLevel = () => {
-        // props.navigation.navigate('xxx');
+        props.navigation.navigate('AddingRouteDriverStepC');
     };
     const handlerTabBButton = () => {
         setTabADisplay(false);

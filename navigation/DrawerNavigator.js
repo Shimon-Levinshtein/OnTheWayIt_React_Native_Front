@@ -24,7 +24,8 @@ import LoginDriver from '../screens/Drivers/Login/StepA';
 
 import AddingRouteDriverStepA from '../screens/Drivers/AddingRoute/StepA';
 import AddingRouteDriverStepB from '../screens/Drivers/AddingRoute/StepB/StepB';
-// import AddingRouteDriverStepC from '../screens/Drivers/AddingRoute/StepC';
+import AddingRouteDriverStepC from '../screens/Drivers/AddingRoute/StepC';
+import AddingRouteDriverStepD from '../screens/Drivers/AddingRoute/StepD';
 
 
 const Drawer = createDrawerNavigator();
@@ -91,7 +92,8 @@ const AddingRouteDriver = () => {
         <Stack.Navigator screenOptions={menuScreenOptions}>
             <Stack.Screen name="AddingRouteDriverStepA" component={AddingRouteDriverStepA} options={{title: ''}} />
             <Stack.Screen name="AddingRouteDriverStepB" component={AddingRouteDriverStepB} options={{title: ''}} />
-            {/* <Stack.Screen name="AddingRouteDriverStepC" component={AddingRouteDriverStepC} options={{title: ''}} /> */}
+            <Stack.Screen name="AddingRouteDriverStepC" component={AddingRouteDriverStepC} options={{title: ''}} />
+            <Stack.Screen name="AddingRouteDriverStepD" component={AddingRouteDriverStepD} options={{title: ''}} />
         </Stack.Navigator>
     );
 };

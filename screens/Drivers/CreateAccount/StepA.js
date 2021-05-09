@@ -1,14 +1,15 @@
 import React, { useState, } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import RNPickerSelect from "react-native-picker-select";
 import { useSelector, useDispatch } from 'react-redux';
+import { Picker } from '@react-native-picker/picker';
+
 
 import Colors from '../../../constants/Colors';
 
 
 const StepA = props => {
 
-    const [genderSeledt, setGenderSeledt] = useState('');
+    const [genderSeledt, setGenderSeledt] = useState('זכר');
 
     const handlerNextLevel = () => {
         props.navigation.navigate('CreateAccountStepB');
@@ -36,13 +37,19 @@ const StepA = props => {
                     <TextInput style={styles.input} />
                     <Text style={styles.labelTextImput}>מין</Text>
                     <View style={styles.inputSelect} >
-                        <Text style={styles.inputSelectText}>{genderSeledt}</Text>
-                        <View style={styles.inputSelectArrow}>
-                            <RNPickerSelect
-                                onValueChange={(value) => setGenderSeledt(value)}
-                                items={[{ label: "זכר", value: "זכר" }, { label: "נקבה", value: "נקבה" },]}
-                            />
-                        </View>
+                        <Picker
+                            selectedValue={genderSeledt}
+                            style={{width: '88%',color: Colors.primary, transform: [
+                                { scaleX: 1.2 }, 
+                                { scaleY: 1.2 },
+                             ],}}
+                            dropdownIconColor={Colors.primary}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setGenderSeledt(itemValue)
+                            }>
+                            <Picker.Item label="זכר" value="זכר" />
+                            <Picker.Item label="נקבה" value="נקבה" />
+                        </Picker>
                     </View>
                     <Text style={styles.labelTextImput}>גיל</Text>
                     <TextInput keyboardType='numeric' style={styles.input} />
@@ -161,24 +168,14 @@ const styles = StyleSheet.create({
         textAlign: 'right',
     },
     inputSelect: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        color: Colors.primary,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: Colors.primary,
         height: 40,
         width: "100%",
         borderWidth: 1,
         borderRadius: 10,
         marginBottom: 15,
-    },
-    inputSelectText: {
-        color: Colors.primary,
-        fontSize: 18,
-        padding: 7,
-        width: '80%',
-    },
-    inputSelectArrow: {
-        width: '15%',
     },
     containingButton: {
         height: 110,
