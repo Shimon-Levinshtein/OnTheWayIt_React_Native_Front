@@ -9,7 +9,7 @@ import Colors from '../../../constants/Colors';
 
 const StepA = props => {
 
-    const [genderSeledt, setGenderSeledt] = useState('זכר');
+    const [genderSeledt, setGenderSeledt] = useState('בחר/י');
 
     const handlerNextLevel = () => {
         props.navigation.navigate('CreateAccountStepB');

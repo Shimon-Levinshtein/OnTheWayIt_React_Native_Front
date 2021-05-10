@@ -19,6 +19,10 @@ const PlacesListScreen = props => {
     }
   };
 
+  const handlerCustomerService = () => {
+      props.navigation.navigate('CustomerServiceStack', { screen: 'CustomerServiceSelection' });
+  };
+
   return (
     <View style={styles.continer}>
       <View style={styles.containingTitelText}>
@@ -31,7 +35,7 @@ const PlacesListScreen = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.containingButton}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => handlerCustomerService()}>
           <Text style={styles.textButton}>קבלת שירות</Text>
           <FontAwesome name="suitcase" size={24} color={Colors.primary} />
         </TouchableOpacity>

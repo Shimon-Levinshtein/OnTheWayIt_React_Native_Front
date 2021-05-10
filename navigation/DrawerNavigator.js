@@ -27,6 +27,11 @@ import AddingRouteDriverStepB from '../screens/Drivers/AddingRoute/StepB/StepB';
 import AddingRouteDriverStepC from '../screens/Drivers/AddingRoute/StepC';
 import AddingRouteDriverStepD from '../screens/Drivers/AddingRoute/StepD';
 
+import CustomerServiceSelection from '../screens/Customers/ServiceSelection';
+
+import CustomerServiceDriverA from '../screens/Customers/OrderDriver/StepA';
+import CustomerServiceDriverB from '../screens/Customers/OrderDriver/StepB';
+import CustomerServiceDriverC from '../screens/Customers/OrderDriver/StepC';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -98,6 +103,17 @@ const AddingRouteDriver = () => {
     );
 };
 
+const CustomerServiceStack = () => {
+    return (
+        <Stack.Navigator screenOptions={menuScreenOptions}>
+            <Stack.Screen name="CustomerServiceSelection" component={CustomerServiceSelection} options={{title: ''}} />
+            <Stack.Screen name="CustomerServiceDriverA" component={CustomerServiceDriverA} options={{title: ''}} />
+            <Stack.Screen name="CustomerServiceDriverB" component={CustomerServiceDriverB} options={{title: ''}} />
+            <Stack.Screen name="CustomerServiceDriverC" component={CustomerServiceDriverC} options={{title: ''}} />
+        </Stack.Navigator>
+    );
+};
+
 
 const DrawerNavigator = () => {
   return (
@@ -105,6 +121,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="HomePage" component={HomeStack} />
       <Drawer.Screen name="Drivers" component={LoginOrSignUpDriver} options={{title: 'Login Or SignUp Driver'}} />
       <Drawer.Screen name="AddingRouteDriver" component={AddingRouteDriver} options={{title: 'Adding Route Driver'}} />
+      <Drawer.Screen name="CustomerServiceStack" component={CustomerServiceStack} options={{title: 'Customer service'}} />
     </Drawer.Navigator>
   );
 };
