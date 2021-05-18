@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Colors from '../../../constants/Colors';
 
-const StepG = props => {
+const StepD = props => {
 
     return (
         <ScrollView style={styles.scrollView}>
@@ -152,4 +152,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default StepG;
+export default StepD;

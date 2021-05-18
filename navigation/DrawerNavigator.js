@@ -35,6 +35,12 @@ import CustomerServiceDriverC from '../screens/Customers/OrderDriver/StepC';
 import CustomerServiceDriverD from '../screens/Customers/OrderDriver/StepD';
 import CustomerServiceDriverE from '../screens/Customers/OrderDriver/StepE';
 
+import CustomerOrderDeliveryA from '../screens/Customers/OrderDelivery/StepA';
+import CustomerOrderDeliveryB from '../screens/Customers/OrderDelivery/StepB';
+import CustomerOrderDeliveryC from '../screens/Customers/OrderDelivery/StepC';
+import CustomerOrderDeliveryD from '../screens/Customers/OrderDelivery/StepD';
+import CustomerOrderDeliveryE from '../screens/Customers/OrderDelivery/StepE';
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -109,11 +115,18 @@ const CustomerServiceStack = () => {
     return (
         <Stack.Navigator screenOptions={menuScreenOptions}>
             <Stack.Screen name="CustomerServiceSelection" component={CustomerServiceSelection} options={{title: ''}} />
+            
             <Stack.Screen name="CustomerServiceDriverA" component={CustomerServiceDriverA} options={{title: ''}} />
             <Stack.Screen name="CustomerServiceDriverB" component={CustomerServiceDriverB} options={{title: ''}} />
             <Stack.Screen name="CustomerServiceDriverC" component={CustomerServiceDriverC} options={{title: ''}} />
             <Stack.Screen name="CustomerServiceDriverD" component={CustomerServiceDriverD} options={{title: ''}} />
             <Stack.Screen name="CustomerServiceDriverE" component={CustomerServiceDriverE} options={{title: ''}} />
+
+            <Stack.Screen name="CustomerOrderDeliveryA" component={CustomerOrderDeliveryA} options={{title: ''}} />
+            <Stack.Screen name="CustomerOrderDeliveryB" component={CustomerOrderDeliveryB} options={{title: ''}} />
+            <Stack.Screen name="CustomerOrderDeliveryC" component={CustomerOrderDeliveryC} options={{title: ''}} />
+            <Stack.Screen name="CustomerOrderDeliveryD" component={CustomerOrderDeliveryD} options={{title: ''}} />
+            <Stack.Screen name="CustomerOrderDeliveryE" component={CustomerOrderDeliveryE} options={{title: ''}} />
         </Stack.Navigator>
     );
 };

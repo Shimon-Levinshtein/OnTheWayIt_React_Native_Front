@@ -1,26 +1,25 @@
 import React, { useState, } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-import Colors from '../../constants/Colors';
+import Colors from '../../../constants/Colors';
 
-const ServiceSelection = props => {
+const StepE = props => {
 
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.continer}>
+                <View style={styles.containingCheckmarkIonicon}>
+                    <Ionicons name="md-checkmark-done-outline" size={150} color="white" />
+                </View>
                 <View style={styles.containingTitelText}>
-                    <Text style={styles.titelText}>שלום,</Text>
-                    <Text style={styles.titelText}>מה סוג השירות שרצונך להזמין?</Text>
-                    {/* <Text style={styles.text}> שלב 7/7</Text> */}
+                    <Text style={styles.titelText}>הפרטים התקבלו בהצלחה!</Text>
+                    <Text style={styles.text}>אנו מחפשים עבורכם נותן שירות מתאים תקבלו עדכון בהקדם </Text>
                 </View>
 
                 <View style={styles.containingButton}>
-                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('CustomerServiceDriverA')}>
-                        <Text style={styles.textButton}>נהג</Text>
-                    </TouchableOpacity>
-               
-                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('CustomerOrderDeliveryA')}>
-                        <Text style={styles.textButton}>משלוח</Text>
+                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('HomePage')}>
+                        <Text style={styles.textButton}>חזרה לעמוד הבית</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -32,45 +31,50 @@ const ServiceSelection = props => {
 
 const styles = StyleSheet.create({
     scrollView: {
-        backgroundColor: 'white',
+        backgroundColor: Colors.primary,
     },
     continer: {
-        backgroundColor: 'white',
+        flex:1,
         height: '100%',
         width: '100%',
     },
-    containingTitelText: {
-        backgroundColor: Colors.primary,
-        height: 120,
+    containingCheckmarkIonicon: {
+        marginTop: 80,
         justifyContent: 'center',
+        alignItems: 'center',
+    },
+    containingTitelText: {
+        height: 100,
+        justifyContent: 'center',
+        marginBottom: 40,
     },
     titelText: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
         textAlign: 'center',
+        marginTop: 8,
+
     },
     text: {
         color: 'white',
-        fontSize: 15,
+        fontSize: 17,
         textAlign: 'center',
         marginHorizontal: '10%',
         marginTop: 8
     },
     containingButton: {
-        flexDirection: 'column',
+        height: 110,
         width: '100%',
         alignItems: 'center',
         textAlign: 'center',
-        justifyContent: 'space-around',
-        marginVertical: 40,
+        justifyContent: 'center',
+        paddingBottom: 20,
     },
     button: {
-        backgroundColor: Colors.primaryLight,
-        borderColor: Colors.primary,
-        borderWidth: 1,
-        width: '50%',
-        height: 130,
+        backgroundColor: 'white',
+        width: '80%',
+        height: 70,
         borderRadius: 15,
         overflow: 'hidden',
         shadowColor: '#000',
@@ -80,7 +84,6 @@ const styles = StyleSheet.create({
         elevation: 8,
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 20,
     },
     textButton: {
         color: Colors.primary,
@@ -90,4 +93,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ServiceSelection;
+export default StepE;
