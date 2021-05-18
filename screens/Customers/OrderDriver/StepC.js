@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../../constants/Colors';
 
 
-const StepC = props => {
+const StepD = props => {
 
     const handlerNextLevel = () => {
-        // props.navigation.navigate('AddingRouteDriver');
+        props.navigation.navigate('CustomerServiceDriverD');
     };
 
 
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default StepC;
+export default StepD;

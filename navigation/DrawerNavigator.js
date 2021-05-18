@@ -32,6 +32,8 @@ import CustomerServiceSelection from '../screens/Customers/ServiceSelection';
 import CustomerServiceDriverA from '../screens/Customers/OrderDriver/StepA';
 import CustomerServiceDriverB from '../screens/Customers/OrderDriver/StepB';
 import CustomerServiceDriverC from '../screens/Customers/OrderDriver/StepC';
+import CustomerServiceDriverD from '../screens/Customers/OrderDriver/StepD';
+import CustomerServiceDriverE from '../screens/Customers/OrderDriver/StepE';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -110,6 +112,8 @@ const CustomerServiceStack = () => {
             <Stack.Screen name="CustomerServiceDriverA" component={CustomerServiceDriverA} options={{title: ''}} />
             <Stack.Screen name="CustomerServiceDriverB" component={CustomerServiceDriverB} options={{title: ''}} />
             <Stack.Screen name="CustomerServiceDriverC" component={CustomerServiceDriverC} options={{title: ''}} />
+            <Stack.Screen name="CustomerServiceDriverD" component={CustomerServiceDriverD} options={{title: ''}} />
+            <Stack.Screen name="CustomerServiceDriverE" component={CustomerServiceDriverE} options={{title: ''}} />
         </Stack.Navigator>
     );
 };
