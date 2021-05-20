@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ionicons, EvilIcons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons, EvilIcons, FontAwesome, Feather } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { DrawerActions } from '@react-navigation/native';
@@ -41,17 +41,41 @@ import CustomerOrderDeliveryC from '../screens/Customers/OrderDelivery/StepC';
 import CustomerOrderDeliveryD from '../screens/Customers/OrderDelivery/StepD';
 import CustomerOrderDeliveryE from '../screens/Customers/OrderDelivery/StepE';
 
+import UserDriverPersonalArea from '../screens/User/Driver/DriverPersonalArea';
+import UserDriverAccountDetails from '../screens/User/Driver/AccountDetails';
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const menuScreenOptions = ({ navigation, route }) => ({
   headerLeft: props =>
-      <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-          <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10, marginLeft: 10 }} />
-      </TouchableOpacity>,
+    <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+      <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10, marginLeft: 10 }} />
+    </TouchableOpacity>,
   headerTintColor: 'white',
   headerStyle: {
-      backgroundColor: '#00a9ff',
+    backgroundColor: '#00a9ff',
+  },
+});
+
+const menuScreenOptionsUser = ({ navigation, route }) => ({
+  headerLeft: props =>
+    <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+      <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10, marginLeft: 10 }} />
+    </TouchableOpacity>,
+     headerRight: props => <View style={styles.continerHeaderLeftIcons}>
+     <TouchableOpacity onPress={() => navigation.goBack()}>
+       <Ionicons name="chevron-back" size={30} color='white' style={{ marginLeft: 10, marginRight: 10 }} />
+     </TouchableOpacity>
+   </View>,
+  headerTintColor: 'white',
+  headerStyle: {
+    backgroundColor: '#00a9ff',
+  },
+  headerTitleStyle: {
+    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: 'bold',
   },
 });
 
@@ -69,8 +93,12 @@ const HomeStack = () => {
               <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10 }} />
             </TouchableOpacity>,
           headerRight: props => <View style={styles.continerHeaderLeftIcons}>
-            <FontAwesome name="bell" size={23} color='white' style={{ marginLeft: 7, marginTop: 7 }} />
-            <EvilIcons name="user" size={48} color='white' style={{ marginLeft: 10, marginRight: 10 }} />
+            <TouchableOpacity onPress={() => navigation.navigate('xxx')}>
+              <FontAwesome name="bell" size={23} color='white' style={{ marginLeft: 7, marginTop: 7 }} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('UserDriverPersonalAreaStack')}>
+              <EvilIcons name="user" size={48} color='white' style={{ marginLeft: 10, marginRight: 10 }} />
+            </TouchableOpacity>
           </View>,
           headerTintColor: '#00a9ff',
           headerStyle: {
@@ -83,52 +111,83 @@ const HomeStack = () => {
 };
 
 
-const LoginOrSignUpDriver = () => {
-    return (
-        <Stack.Navigator screenOptions={menuScreenOptions}>
-            <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp} options={{title: ''}} />
-            <Stack.Screen name="LoginDriver" component={LoginDriver} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepA" component={CreateAccountStepA} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepB" component={CreateAccountStepB} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepC" component={CreateAccountStepC} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepD" component={CreateAccountStepD} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepE" component={CreateAccountStepE} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepF" component={CreateAccountStepF} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepG" component={CreateAccountStepG} options={{title: ''}} />
-            <Stack.Screen name="CreateAccountStepH" component={CreateAccountStepH} options={{title: ''}} />
-        </Stack.Navigator>
-    );
+const LoginOrSignUpDriverStack = () => {
+  return (
+    <Stack.Navigator screenOptions={menuScreenOptions}>
+      <Stack.Screen name="LoginOrSignUp" component={LoginOrSignUp} options={{ title: '' }} />
+      <Stack.Screen name="LoginDriver" component={LoginDriver} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepA" component={CreateAccountStepA} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepB" component={CreateAccountStepB} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepC" component={CreateAccountStepC} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepD" component={CreateAccountStepD} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepE" component={CreateAccountStepE} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepF" component={CreateAccountStepF} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepG" component={CreateAccountStepG} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepH" component={CreateAccountStepH} options={{ title: '' }} />
+    </Stack.Navigator>
+  );
 };
 
-const AddingRouteDriver = () => {
-    return (
-        <Stack.Navigator screenOptions={menuScreenOptions}>
-            <Stack.Screen name="AddingRouteDriverStepA" component={AddingRouteDriverStepA} options={{title: ''}} />
-            <Stack.Screen name="AddingRouteDriverStepB" component={AddingRouteDriverStepB} options={{title: ''}} />
-            <Stack.Screen name="AddingRouteDriverStepC" component={AddingRouteDriverStepC} options={{title: ''}} />
-            <Stack.Screen name="AddingRouteDriverStepD" component={AddingRouteDriverStepD} options={{title: ''}} />
-        </Stack.Navigator>
-    );
+const AddingRouteDriverStack = () => {
+  return (
+    <Stack.Navigator screenOptions={menuScreenOptions}>
+      <Stack.Screen name="AddingRouteDriverStepA" component={AddingRouteDriverStepA} options={{ title: '' }} />
+      <Stack.Screen name="AddingRouteDriverStepB" component={AddingRouteDriverStepB} options={{ title: '' }} />
+      <Stack.Screen name="AddingRouteDriverStepC" component={AddingRouteDriverStepC} options={{ title: '' }} />
+      <Stack.Screen name="AddingRouteDriverStepD" component={AddingRouteDriverStepD} options={{ title: '' }} />
+    </Stack.Navigator>
+  );
 };
 
 const CustomerServiceStack = () => {
-    return (
-        <Stack.Navigator screenOptions={menuScreenOptions}>
-            <Stack.Screen name="CustomerServiceSelection" component={CustomerServiceSelection} options={{title: ''}} />
-            
-            <Stack.Screen name="CustomerServiceDriverA" component={CustomerServiceDriverA} options={{title: ''}} />
-            <Stack.Screen name="CustomerServiceDriverB" component={CustomerServiceDriverB} options={{title: ''}} />
-            <Stack.Screen name="CustomerServiceDriverC" component={CustomerServiceDriverC} options={{title: ''}} />
-            <Stack.Screen name="CustomerServiceDriverD" component={CustomerServiceDriverD} options={{title: ''}} />
-            <Stack.Screen name="CustomerServiceDriverE" component={CustomerServiceDriverE} options={{title: ''}} />
+  return (
+    <Stack.Navigator screenOptions={menuScreenOptions}>
+      <Stack.Screen name="CustomerServiceSelection" component={CustomerServiceSelection} options={{ title: '' }} />
 
-            <Stack.Screen name="CustomerOrderDeliveryA" component={CustomerOrderDeliveryA} options={{title: ''}} />
-            <Stack.Screen name="CustomerOrderDeliveryB" component={CustomerOrderDeliveryB} options={{title: ''}} />
-            <Stack.Screen name="CustomerOrderDeliveryC" component={CustomerOrderDeliveryC} options={{title: ''}} />
-            <Stack.Screen name="CustomerOrderDeliveryD" component={CustomerOrderDeliveryD} options={{title: ''}} />
-            <Stack.Screen name="CustomerOrderDeliveryE" component={CustomerOrderDeliveryE} options={{title: ''}} />
-        </Stack.Navigator>
-    );
+      <Stack.Screen name="CustomerServiceDriverA" component={CustomerServiceDriverA} options={{ title: '' }} />
+      <Stack.Screen name="CustomerServiceDriverB" component={CustomerServiceDriverB} options={{ title: '' }} />
+      <Stack.Screen name="CustomerServiceDriverC" component={CustomerServiceDriverC} options={{ title: '' }} />
+      <Stack.Screen name="CustomerServiceDriverD" component={CustomerServiceDriverD} options={{ title: '' }} />
+      <Stack.Screen name="CustomerServiceDriverE" component={CustomerServiceDriverE} options={{ title: '' }} />
+
+      <Stack.Screen name="CustomerOrderDeliveryA" component={CustomerOrderDeliveryA} options={{ title: '' }} />
+      <Stack.Screen name="CustomerOrderDeliveryB" component={CustomerOrderDeliveryB} options={{ title: '' }} />
+      <Stack.Screen name="CustomerOrderDeliveryC" component={CustomerOrderDeliveryC} options={{ title: '' }} />
+      <Stack.Screen name="CustomerOrderDeliveryD" component={CustomerOrderDeliveryD} options={{ title: '' }} />
+      <Stack.Screen name="CustomerOrderDeliveryE" component={CustomerOrderDeliveryE} options={{ title: '' }} />
+    </Stack.Navigator>
+  );
+};
+
+const UserDriverPersonalAreaStack = () => {
+  return (
+    <Stack.Navigator screenOptions={menuScreenOptionsUser}>
+      <Stack.Screen
+        name="UserDriverPersonalArea"
+        component={UserDriverPersonalArea}
+        options={({ navigation, route }) => ({
+          headerLeft: props =>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="x" size={30} color={Colors.primary} style={{ marginLeft: 10 }} />
+            </TouchableOpacity>,
+          headerRight: props => <View style={styles.continerHeaderLeftIcons}>
+            <EvilIcons name="user" size={48} color={Colors.primary} style={{ marginLeft: 10, marginRight: 10 }} />
+          </View>,
+          headerTintColor: Colors.primary,
+          headerTitleStyle: {
+            textAlign: 'right',
+            fontSize: 16,
+            fontWeight: 'bold',
+          },
+          headerStyle: {
+            backgroundColor: Colors.primaryLight,
+          },
+          title: 'אהרון גליק'
+        })}
+      />
+        <Stack.Screen name="UserDriverAccountDetails" component={UserDriverAccountDetails} options={{ title: 'פרטי החשבון' }} />
+    </Stack.Navigator>
+  );
 };
 
 
@@ -136,9 +195,10 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerPosition='right' drawerType='front'>
       <Drawer.Screen name="HomePage" component={HomeStack} />
-      <Drawer.Screen name="Drivers" component={LoginOrSignUpDriver} options={{title: 'Login Or SignUp Driver'}} />
-      <Drawer.Screen name="AddingRouteDriver" component={AddingRouteDriver} options={{title: 'Adding Route Driver'}} />
-      <Drawer.Screen name="CustomerServiceStack" component={CustomerServiceStack} options={{title: 'Customer service'}} />
+      <Drawer.Screen name="Drivers" component={LoginOrSignUpDriverStack} options={{ title: 'Login Or SignUp Driver' }} />
+      <Drawer.Screen name="AddingRouteDriver" component={AddingRouteDriverStack} options={{ title: 'Adding Route Driver' }} />
+      <Drawer.Screen name="CustomerServiceStack" component={CustomerServiceStack} options={{ title: 'Customer service' }} />
+      <Drawer.Screen name="UserDriverPersonalAreaStack" component={UserDriverPersonalAreaStack} options={{ title: 'User Driver Personal Area' }} />
     </Drawer.Navigator>
   );
 };
