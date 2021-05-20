@@ -16,7 +16,7 @@ const DriverPersonalArea = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.containingButton}>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('xxx')}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('UserDriverChangePassword')}>
           <Text style={styles.textButton}>סיסמה והבטחה</Text>
         </TouchableOpacity>
       </View>

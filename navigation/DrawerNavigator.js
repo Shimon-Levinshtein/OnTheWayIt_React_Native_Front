@@ -43,6 +43,7 @@ import CustomerOrderDeliveryE from '../screens/Customers/OrderDelivery/StepE';
 
 import UserDriverPersonalArea from '../screens/User/Driver/DriverPersonalArea';
 import UserDriverAccountDetails from '../screens/User/Driver/AccountDetails';
+import UserDriverChangePassword from '../screens/User/Driver/ChangePassword';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -55,7 +56,10 @@ const menuScreenOptions = ({ navigation, route }) => ({
   headerTintColor: 'white',
   headerStyle: {
     backgroundColor: '#00a9ff',
+    elevation: 0,
+    shadowOpacity: 0,
   },
+
 });
 
 const menuScreenOptionsUser = ({ navigation, route }) => ({
@@ -63,11 +67,11 @@ const menuScreenOptionsUser = ({ navigation, route }) => ({
     <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
       <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10, marginLeft: 10 }} />
     </TouchableOpacity>,
-     headerRight: props => <View style={styles.continerHeaderLeftIcons}>
-     <TouchableOpacity onPress={() => navigation.goBack()}>
-       <Ionicons name="chevron-back" size={30} color='white' style={{ marginLeft: 10, marginRight: 10 }} />
-     </TouchableOpacity>
-   </View>,
+  headerRight: props => <View style={styles.continerHeaderLeftIcons}>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+      <Ionicons name="chevron-back" size={30} color='white' style={{ marginLeft: 10, marginRight: 10 }} />
+    </TouchableOpacity>
+  </View>,
   headerTintColor: 'white',
   headerStyle: {
     backgroundColor: '#00a9ff',
@@ -76,6 +80,8 @@ const menuScreenOptionsUser = ({ navigation, route }) => ({
     textAlign: 'center',
     fontSize: 17,
     fontWeight: 'bold',
+    elevation: 0,
+    shadowOpacity: 0,
   },
 });
 
@@ -103,6 +109,8 @@ const HomeStack = () => {
           headerTintColor: '#00a9ff',
           headerStyle: {
             backgroundColor: '#00a9ff',
+            elevation: 0,
+            shadowOpacity: 0,
           },
         })}
       />
@@ -167,7 +175,7 @@ const UserDriverPersonalAreaStack = () => {
         component={UserDriverPersonalArea}
         options={({ navigation, route }) => ({
           headerLeft: props =>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Feather name="x" size={30} color={Colors.primary} style={{ marginLeft: 10 }} />
             </TouchableOpacity>,
           headerRight: props => <View style={styles.continerHeaderLeftIcons}>
@@ -185,7 +193,8 @@ const UserDriverPersonalAreaStack = () => {
           title: 'אהרון גליק'
         })}
       />
-        <Stack.Screen name="UserDriverAccountDetails" component={UserDriverAccountDetails} options={{ title: 'פרטי החשבון' }} />
+      <Stack.Screen name="UserDriverAccountDetails" component={UserDriverAccountDetails} options={{ title: 'פרטי החשבון' }} />
+      <Stack.Screen name="UserDriverChangePassword" component={UserDriverChangePassword} options={{ title: 'שינוי סיסמה' }} />
     </Stack.Navigator>
   );
 };
