@@ -21,17 +21,17 @@ const DriverPersonalArea = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.containingButton}>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('xxx')}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('UserDriverDeliveriesOnMyRoute')}>
           <Text style={styles.textButton}>משלוחים ומסלולים שלי</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.containingButton}>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('xxx')}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('UserDriverMyOrders')}>
           <Text style={styles.textButton}>הזמנות שלי</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.containingButton}>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('xxx')}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('UserDriverPermanentRoutes')}>
           <Text style={styles.textButton}>מסלולים קבועים</Text>
         </TouchableOpacity>
       </View>

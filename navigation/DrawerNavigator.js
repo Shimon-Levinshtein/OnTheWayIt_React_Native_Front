@@ -44,6 +44,9 @@ import CustomerOrderDeliveryE from '../screens/Customers/OrderDelivery/StepE';
 import UserDriverPersonalArea from '../screens/User/Driver/DriverPersonalArea';
 import UserDriverAccountDetails from '../screens/User/Driver/AccountDetails';
 import UserDriverChangePassword from '../screens/User/Driver/ChangePassword';
+import UserDriverDeliveriesOnMyRoute from '../screens/User/Driver/DeliveriesOnMyRoute';
+import UserDriverMyOrders from '../screens/User/Driver/MyOrders';
+import UserDriverPermanentRoutes from '../screens/User/Driver/PermanentRoutes';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -195,6 +198,9 @@ const UserDriverPersonalAreaStack = () => {
       />
       <Stack.Screen name="UserDriverAccountDetails" component={UserDriverAccountDetails} options={{ title: 'פרטי החשבון' }} />
       <Stack.Screen name="UserDriverChangePassword" component={UserDriverChangePassword} options={{ title: 'שינוי סיסמה' }} />
+      <Stack.Screen name="UserDriverDeliveriesOnMyRoute" component={UserDriverDeliveriesOnMyRoute} options={{ title: 'משלוחים במסלול שלך' }} />
+      <Stack.Screen name="UserDriverMyOrders" component={UserDriverMyOrders} options={{ title: 'ההזמנות שלי' }} />
+      <Stack.Screen name="UserDriverPermanentRoutes" component={UserDriverPermanentRoutes} options={{ title: 'מסלולים קבועים' }} />
     </Stack.Navigator>
   );
 };
