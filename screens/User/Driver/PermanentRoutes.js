@@ -56,7 +56,7 @@ const DeliveriesOnMyRoute = props => {
 
             </ScrollView>
             <View style={styles.containingButton}>
-                <TouchableOpacity style={styles.buttonEdit} onPress={() => { }}>
+                <TouchableOpacity style={styles.buttonEdit} onPress={() => props.navigation.navigate('UserDriverLevelTwoAddRegularRoute')}>
                     <Entypo name="plus" size={26} color={Colors.primary} />
                     <Text style={styles.textButtonEdit}>הוסף מסלול</Text>
                 </TouchableOpacity>

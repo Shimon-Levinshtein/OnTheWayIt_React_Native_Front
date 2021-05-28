@@ -1,7 +1,7 @@
 import React, { useState, } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Switch, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Entypo, Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { Entypo, Ionicons, MaterialIcons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Colors from '../../../../../constants/Colors';
@@ -10,12 +10,24 @@ import Colors from '../../../../../constants/Colors';
 const TabA = props => {
 
     const dataNow = new Date();
+    // Opposite
+    const dataNowOpposite = new Date();
+    dataNowOpposite.setHours(dataNowOpposite.getHours() + 3);
+
+    const [counterRoute, setCounterRoute] = useState(false);
     const [showDate, setShowDate] = useState(false);
     const [date, setDate] = useState(new Date());
     const [dateDisplay, setDateDisplay] = useState(dataNow.toLocaleDateString('en-GB'));
     const [hour, setHour] = useState(new Date());
     const [hourDisplay, setHourDisplay] = useState(("0" + dataNow.getHours()).slice(-2) + ":" + ("0" + dataNow.getMinutes()).slice(-2));
     const [showTime, setShowTime] = useState(false);
+    // Opposite
+    const [showDateOpposite, setShowDateOpposite] = useState(false);
+    const [dateOpposite, setDateOpposite] = useState(new Date());
+    const [dateDisplayOpposite, setDateDisplayOpposite] = useState(dataNowOpposite.toLocaleDateString('en-GB'));
+    const [hourOpposite, setHourOpposite] = useState(new Date());
+    const [hourDisplayOpposite, setHourDisplayOpposite] = useState(("0" + dataNowOpposite.getHours()).slice(-2) + ":" + ("0" + dataNowOpposite.getMinutes()).slice(-2));
+    const [showTimeOpposite, setShowTimeOpposite] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -31,7 +43,20 @@ const TabA = props => {
         setHourDisplay(("0" + selectedDate.getHours()).slice(-2) + ":" + ("0" + selectedDate.getMinutes()).slice(-2));
 
     };
- 
+    // Opposite
+    const onChangeDateOpposite = (event, selectedDate) => {
+        setShowDateOpposite(false);
+        setDateOpposite(selectedDate);
+        setDateDisplayOpposite(selectedDate.toLocaleDateString('en-GB'));
+    };
+
+    const onChangeHourOpposite = (event, selectedDate) => {
+        setShowTimeOpposite(false);
+        setHourOpposite(selectedDate);
+        setHourDisplayOpposite(("0" + selectedDate.getHours()).slice(-2) + ":" + ("0" + selectedDate.getMinutes()).slice(-2));
+
+    };
+
     return (
         <View >
             <View style={styles.containingInputs}>
@@ -47,10 +72,22 @@ const TabA = props => {
                 <TextInput keyboardType='numeric' style={styles.input} />
             </View>
 
-            <TouchableOpacity style={styles.buttonCounterRoute}>
+            <TouchableOpacity style={styles.buttonCounterRoute} onPress={() => setCounterRoute(counterRoute ? false : true)}>
                 <Ionicons name="swap-vertical" size={24} color={Colors.primary} />
                 <Text style={styles.buttonCounterRouteText}>הוספת מסלול נגדי</Text>
             </TouchableOpacity>
+
+            {counterRoute && <View style={styles.viewAllOppositeRoute}>
+                <View style={styles.labelTextImputContiner}>
+                    <MaterialCommunityIcons name="swap-vertical-bold" size={24} color={Colors.primary} />
+                    <Text style={styles.labelTextImput}>מסלול נגדי</Text>
+                </View>
+                <View style={styles.viewOppositeRoute}>
+                    <Text style={styles.textOppositeRoute}>מנחם 10, ירושלים</Text>
+                    <AntDesign name="arrowleft" size={18} color={Colors.primary} />
+                    <Text style={styles.textOppositeRoute}>ישעיהו 5, בני ברק</Text>
+                </View>
+            </View>}
 
             <View style={styles.boundaryLine}></View>
 
@@ -89,6 +126,44 @@ const TabA = props => {
                     )}
                 </TouchableOpacity>
             </View>
+
+            {counterRoute && <View>
+                <View style={styles.departureTimeContiner}>
+                    <MaterialIcons name="watch-later" size={24} color={Colors.primary} />
+                    <Text style={styles.departureTimeBoldText}>זמן יציאה חזור</Text>
+                    <Text style={styles.departureTimeText}>* אופציונלי</Text>
+                </View>
+                <View style={styles.containerDatePicker}>
+                    <TouchableOpacity style={styles.datePickerStyle} onPress={() => setShowDateOpposite(true)}>
+                        <Text style={styles.dateTextStyle}>{dateDisplayOpposite}</Text>
+                        <AntDesign name="calendar" size={24} color={Colors.primary} />
+                        {showDateOpposite && (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={dateOpposite}
+                                mode='date'
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChangeDateOpposite}
+                            />
+                        )}
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTimeOpposite(true)}>
+                        <Text style={styles.hourTextStyle}>{hourDisplayOpposite}</Text>
+                        <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
+                        {showTimeOpposite && (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={hourOpposite}
+                                mode='time'
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChangeHourOpposite}
+                            />
+                        )}
+                    </TouchableOpacity>
+                </View>
+            </View>}
 
             <View style={styles.departureTimeContiner}>
                 <Text style={styles.departureTimeBoldText}>הגדר זמן משוער או מדוייק</Text>
@@ -160,6 +235,20 @@ const styles = StyleSheet.create({
         color: Colors.primary,
         fontWeight: 'bold',
         marginHorizontal: 10,
+    },
+    viewAllOppositeRoute: {
+        marginHorizontal: '7%',
+        marginTop: 13,
+    },
+    viewOppositeRoute: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    textOppositeRoute: {
+        color: Colors.primary,
+        fontSize: 15,
+        textAlign: 'center',
+        marginHorizontal: 5
     },
     boundaryLine: {
         backgroundColor: Colors.primaryLight,
