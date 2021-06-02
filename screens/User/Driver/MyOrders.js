@@ -22,7 +22,7 @@ const DeliveriesOnMyRoute = props => {
                             <Text style={styles.TextTopViewHalfRightStatusConfirmed}>המשלוחן יגיע לאסוף את המשלוח במועד הנקוב</Text>
                         </View>
                         <View style={styles.topViewHalfLeftStatusConfirmed}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('UserDriverCancelingDelivery')}>
                                 <Ionicons name="trash" size={25} style={styles.iconTrashStatusConfirmed} />
                             </TouchableOpacity>
                         </View>

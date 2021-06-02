@@ -160,13 +160,13 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold',
     },
-    textButtonFinish: {
+    textButtonFocus: {
         color: 'white',
         textAlign: 'center',
         fontSize: 17,
         fontWeight: 'bold',
     },
-    textButtonFocus: {
+    textButtonFinish: {
         color: 'white',
         textAlign: 'center',
         fontSize: 17,

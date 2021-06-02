@@ -24,7 +24,7 @@ const DeliveriesOnMyRoute = props => {
                             <Text style={styles.textRegularRoutes}>ישעיהו 5, בני ברק</Text>
                         </View>
                         <View style={styles.ViewRegularRoutesBottom}>
-                            <TouchableOpacity style={styles.TrackButton} onPress={() => { }}>
+                            <TouchableOpacity style={styles.TrackButton} onPress={() => props.navigation.navigate('UserDriverLevelTwoAddRegularRoute')}>
                                 <Text style={styles.textTrackButton}>ערוך מסלול</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.TrackButton} onPress={() => { }}>
@@ -44,7 +44,7 @@ const DeliveriesOnMyRoute = props => {
                             <Text style={styles.textRegularRoutes}>זמן חזרה 14:00</Text>
                         </View>
                         <View style={styles.ViewRegularRoutesBottom}>
-                            <TouchableOpacity style={styles.TrackButton} onPress={() => { }}>
+                            <TouchableOpacity style={styles.TrackButton} onPress={() => props.navigation.navigate('UserDriverLevelTwoAddRegularRoute')}>
                                 <Text style={styles.textTrackButton}>ערוך מסלול</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.TrackButton} onPress={() => { }}>

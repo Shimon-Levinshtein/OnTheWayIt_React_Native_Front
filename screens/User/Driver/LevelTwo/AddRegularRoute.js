@@ -1,7 +1,7 @@
 import React, { useState, } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput, Switch } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Entypo, Ionicons, MaterialIcons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, Ionicons, MaterialIcons, AntDesign, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Colors from '../../../../constants/Colors';
@@ -14,6 +14,20 @@ const AddRegularRoute = props => {
     // Opposite
     const dataNowOpposite = new Date();
     dataNowOpposite.setHours(dataNowOpposite.getHours() + 3);
+
+    const [desiredDelivery, setDesiredDelivery] = useState([]);
+
+    const WhatToTakeButton = (buttonNeme) => {
+        if (desiredDelivery.includes(buttonNeme)) {
+            const index = desiredDelivery.indexOf(buttonNeme);
+            const newArr = [...desiredDelivery];
+            newArr.splice(index, 1);
+            setDesiredDelivery(newArr);
+        } else {
+            setDesiredDelivery([...[buttonNeme], ...desiredDelivery]);
+        };
+    };
+
 
     const [counterRoute, setCounterRoute] = useState(false);
     const [showDate, setShowDate] = useState(false);
@@ -97,25 +111,54 @@ const AddRegularRoute = props => {
                     <View style={styles.boundaryLine}></View>
 
                     <View style={styles.departureTimeContiner}>
-                        <MaterialIcons name="watch-later" size={24} color={Colors.primary} />
-                        <Text style={styles.departureTimeBoldText}>זמן יציאה</Text>
+                        <FontAwesome5 name="calendar-alt" size={24} color={Colors.primary} />
+                        <Text style={styles.departureTimeBoldText}>ימים בשבוע</Text>
                         <Text style={styles.departureTimeText}>* אופציונלי</Text>
                     </View>
-                    <View style={styles.containerDatePicker}>
-                        <TouchableOpacity style={styles.datePickerStyle} onPress={() => setShowDate(true)}>
-                            <Text style={styles.dateTextStyle}>{dateDisplay}</Text>
-                            <AntDesign name="calendar" size={24} color={Colors.primary} />
-                            {showDate && (
-                                <DateTimePicker
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    mode='date'
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onChangeDate}
-                                />
-                            )}
+                    <View style={styles.daysWeekContiner}>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('א') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('א')}>
+                            <Text style={desiredDelivery.includes('א') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>א</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('ב') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('ב')}>
+                            <Text style={desiredDelivery.includes('ב') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>ב</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('ג') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('ג')}>
+                            <Text style={desiredDelivery.includes('ג') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>ג</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('ד') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('ד')}>
+                            <Text style={desiredDelivery.includes('ד') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>ד</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('ה') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('ה')}>
+                            <Text style={desiredDelivery.includes('ה') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>ה</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('ו') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('ו')}>
+                            <Text style={desiredDelivery.includes('ו') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>ו</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={desiredDelivery.includes('ז') ? styles.daysWeekButtonBigFocus : styles.daysWeekButtonBig}
+                            onPress={() => WhatToTakeButton('ז')}>
+                            <Text style={desiredDelivery.includes('ז') ? styles.daysWeekTextButtonFocus : styles.daysWeekTextButton}>ז</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.containerDatePicker}>
+
+                        <View style={styles.labelTextImputContiner}>
+                            <MaterialIcons name="watch-later" size={24} color={Colors.primary} style={{ marginRight: 4 }} />
+                            <Text style={styles.labelTextImput}>שעת יציאה</Text>
+                        </View>
                         <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTime(true)}>
                             <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
                             <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
@@ -132,42 +175,26 @@ const AddRegularRoute = props => {
                         </TouchableOpacity>
                     </View>
 
-                    {counterRoute && <View>
-                        <View style={styles.departureTimeContiner}>
-                            <MaterialIcons name="watch-later" size={24} color={Colors.primary} />
-                            <Text style={styles.departureTimeBoldText}>זמן יציאה חזור</Text>
-                            <Text style={styles.departureTimeText}>* אופציונלי</Text>
+                    {counterRoute && <View style={styles.containerDatePicker}>
+
+                        <View style={styles.labelTextImputContiner}>
+                            <MaterialIcons name="watch-later" size={24} color={Colors.primary} style={{ marginRight: 4 }} />
+                            <Text style={styles.labelTextImput}>שעת חזרה</Text>
                         </View>
-                        <View style={styles.containerDatePicker}>
-                            <TouchableOpacity style={styles.datePickerStyle} onPress={() => setShowDateOpposite(true)}>
-                                <Text style={styles.dateTextStyle}>{dateDisplayOpposite}</Text>
-                                <AntDesign name="calendar" size={24} color={Colors.primary} />
-                                {showDateOpposite && (
-                                    <DateTimePicker
-                                        testID="dateTimePicker"
-                                        value={dateOpposite}
-                                        mode='date'
-                                        is24Hour={true}
-                                        display="default"
-                                        onChange={onChangeDateOpposite}
-                                    />
-                                )}
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTimeOpposite(true)}>
-                                <Text style={styles.hourTextStyle}>{hourDisplayOpposite}</Text>
-                                <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
-                                {showTimeOpposite && (
-                                    <DateTimePicker
-                                        testID="dateTimePicker"
-                                        value={hourOpposite}
-                                        mode='time'
-                                        is24Hour={true}
-                                        display="default"
-                                        onChange={onChangeHourOpposite}
-                                    />
-                                )}
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTime(true)}>
+                            <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
+                            <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
+                            {showTime && (
+                                <DateTimePicker
+                                    testID="dateTimePicker"
+                                    value={hour}
+                                    mode='time'
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChangeHour}
+                                />
+                            )}
+                        </TouchableOpacity>
                     </View>}
 
                     <View style={styles.departureTimeContiner}>
@@ -182,9 +209,6 @@ const AddRegularRoute = props => {
                         <Text style={styles.departureTimeBoldText}>{'מדוייק'}</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.addRoute}>
-                        <Text style={styles.textAddRoute}>+ הוסף מסלול נוסף</Text>
-                    </TouchableOpacity>
                 </View>
                 <View style={styles.containingButton}>
                     <TouchableOpacity style={styles.button} onPress={() => props.navigation.goBack()}>
@@ -222,12 +246,14 @@ const styles = StyleSheet.create({
     labelTextImputContiner: {
         flexDirection: 'row',
         alignContent: 'flex-end',
+        alignItems: 'center',
+        paddingBottom: 5,
     },
     labelTextImput: {
         color: Colors.primary,
         fontWeight: 'bold',
-        fontSize: 18,
-        marginBottom: 5,
+        fontSize: 16,
+        marginBottom: 2,
         textAlign: 'left',
     },
     input: {
@@ -283,17 +309,7 @@ const styles = StyleSheet.create({
         alignContent: 'flex-end',
         height: 40,
         alignItems: 'center',
-    },
-    addRoute: {
-        paddingHorizontal: '8%',
-        height: 50,
-        justifyContent: 'center',
-    },
-    textAddRoute: {
-        textAlign: 'left',
-        color: Colors.primary,
-        fontSize: 16,
-        textDecorationLine: 'underline',
+        marginBottom: 1,
     },
     departureTimeBoldText: {
         color: Colors.primary,
@@ -305,33 +321,51 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         fontSize: 12,
     },
+    daysWeekContiner: {
+        flexDirection: 'row',
+        marginHorizontal: '8%',
+        marginBottom: 20,
+    },
+    daysWeekButtonBig: {
+        borderColor: Colors.primary,
+        height: 30,
+        width: 30,
+        borderWidth: 1,
+        borderRadius: 10,
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginHorizontal: 3,
+    },
+    daysWeekButtonBigFocus: {
+        backgroundColor: Colors.primary,
+        borderColor: Colors.primary,
+        height: 30,
+        width: 30,
+        borderWidth: 1,
+        borderRadius: 10,
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginHorizontal: 3,
+    },
+    daysWeekTextButton: {
+        color: Colors.primary,
+        textAlign: 'center',
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    daysWeekTextButtonFocus: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
     containerDatePicker: {
         marginHorizontal: '8%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    datePickerStyle: {
-        width: '65%',
-        marginTop: 20,
-        color: Colors.primary,
-        borderColor: Colors.primary,
-        height: 40,
-        borderWidth: 1,
-        marginBottom: 20,
-        borderRadius: 10,
-        padding: 7,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    dateTextStyle: {
-        fontSize: 15,
-        color: Colors.primary,
-        marginLeft: "15%"
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
     },
     hourPickerStyle: {
         width: '30%',
-        marginTop: 20,
         color: Colors.primary,
         borderColor: Colors.primary,
         height: 40,
@@ -358,6 +392,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         paddingHorizontal: 10,
+        marginTop: 25,
+        marginBottom: 30,
     },
     button: {
         backgroundColor: Colors.primary,

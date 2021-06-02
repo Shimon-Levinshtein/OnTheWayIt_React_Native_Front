@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ionicons, EvilIcons, FontAwesome, Feather } from '@expo/vector-icons';
+import { Ionicons, EvilIcons, FontAwesome, Feather, MaterialIcons } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { DrawerActions } from '@react-navigation/native';
@@ -48,6 +48,11 @@ import UserDriverDeliveriesOnMyRoute from '../screens/User/Driver/DeliveriesOnMy
 import UserDriverMyOrders from '../screens/User/Driver/MyOrders';
 import UserDriverPermanentRoutes from '../screens/User/Driver/PermanentRoutes';
 import UserDriverLevelTwoAddRegularRoute from '../screens/User/Driver/LevelTwo/AddRegularRoute';
+import UserDriverCancelingDelivery from '../screens/User/Driver/LevelTwo/CancelingDelivery';
+
+import NotificationsDriverNotificationsIndex from '../screens/User/Driver/Notifications/NotificationsIndex';
+import NotificationsDriverAllNotifications from '../screens/User/Driver/Notifications/AllNotifications';
+import NotificationsDriverSurpluses from '../screens/User/Driver/Notifications/Surpluses';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -103,7 +108,7 @@ const HomeStack = () => {
               <Ionicons name="menu" size={35} color='white' style={{ marginRight: 10 }} />
             </TouchableOpacity>,
           headerRight: props => <View style={styles.continerHeaderLeftIcons}>
-            <TouchableOpacity onPress={() => navigation.navigate('xxx')}>
+            <TouchableOpacity onPress={() => navigation.navigate('UserDriverNotificationsStack')}>
               <FontAwesome name="bell" size={23} color='white' style={{ marginLeft: 7, marginTop: 7 }} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('UserDriverPersonalAreaStack')}>
@@ -203,6 +208,40 @@ const UserDriverPersonalAreaStack = () => {
       <Stack.Screen name="UserDriverMyOrders" component={UserDriverMyOrders} options={{ title: 'ההזמנות שלי' }} />
       <Stack.Screen name="UserDriverPermanentRoutes" component={UserDriverPermanentRoutes} options={{ title: 'מסלולים קבועים' }} />
       <Stack.Screen name="UserDriverLevelTwoAddRegularRoute" component={UserDriverLevelTwoAddRegularRoute} options={{ title: 'הוספת מסלול קבוע' }} />
+      <Stack.Screen name="UserDriverCancelingDelivery" component={UserDriverCancelingDelivery} options={{ title: 'ביטול משלוח' }} />
+    </Stack.Navigator>
+  );
+};
+
+const UserDriverNotificationsStack = () => {
+  return (
+    <Stack.Navigator screenOptions={menuScreenOptionsUser}>
+      <Stack.Screen
+        name="NotificationsDriverNotificationsIndex"
+        component={NotificationsDriverNotificationsIndex}
+        options={({ navigation, route }) => ({
+          headerLeft: props =>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="x" size={30} color={Colors.primary} style={{ marginLeft: 10 }} />
+            </TouchableOpacity>,
+          headerRight: props => <View style={styles.continerHeaderLeftIcons}>
+            <MaterialIcons name="notifications-active" size={35} color={Colors.primary} style={{ marginLeft: 10, marginRight: 10 }} />
+          </View>,
+          headerTintColor: Colors.primary,
+          headerTitleStyle: {
+            textAlign: 'right',
+            fontSize: 16,
+            fontWeight: 'bold',
+            marginRight: '30%',
+          },
+          headerStyle: {
+            backgroundColor: Colors.primaryLight,
+          },
+          title: 'התראות'
+        })}
+      />
+      <Stack.Screen name="NotificationsDriverAllNotifications" component={NotificationsDriverAllNotifications} options={{ title: 'כל ההתראות' }} />
+      <Stack.Screen name="NotificationsDriverSurpluses" component={NotificationsDriverSurpluses} options={{ title: 'העדפות' }} />
     </Stack.Navigator>
   );
 };
@@ -216,6 +255,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="AddingRouteDriver" component={AddingRouteDriverStack} options={{ title: 'Adding Route Driver' }} />
       <Drawer.Screen name="CustomerServiceStack" component={CustomerServiceStack} options={{ title: 'Customer service' }} />
       <Drawer.Screen name="UserDriverPersonalAreaStack" component={UserDriverPersonalAreaStack} options={{ title: 'User Driver Personal Area' }} />
+      <Drawer.Screen name="UserDriverNotificationsStack" component={UserDriverNotificationsStack} options={{ title: 'Notification driver' }} />
     </Drawer.Navigator>
   );
 };
