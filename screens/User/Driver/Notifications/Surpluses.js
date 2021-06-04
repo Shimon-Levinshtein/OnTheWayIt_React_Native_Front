@@ -1,12 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch } from 'react-native';
-import { Feather, FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+
 import { useSelector, useDispatch } from 'react-redux';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 import Colors from '../../../../constants/Colors';
 
 
 const AllNotifications = props => {
+
+    const dataNow = new Date();
+    dataNow.setHours(8);
+    dataNow.setMinutes(0);
+    // Opposite
+    const dataNowOpposite = new Date();
+    dataNowOpposite.setHours(22);
+    dataNowOpposite.setMinutes(0);
 
     const [isEnabledA, setIsEnabledA] = useState(false);
     const [isEnabledB, setIsEnabledB] = useState(false);
@@ -18,6 +29,27 @@ const AllNotifications = props => {
     const toggleSwitchC = () => setIsEnabledC(previousState => !previousState);
     const toggleSwitchD = () => setIsEnabledD(previousState => !previousState);
     const toggleSwitchE = () => setIsEnabledE(previousState => !previousState);
+
+    const [hour, setHour] = useState(new Date());
+    const [hourDisplay, setHourDisplay] = useState(("0" + dataNow.getHours()).slice(-2) + ":" + ("0" + dataNow.getMinutes()).slice(-2));
+    const [showTime, setShowTime] = useState(false);
+    // Opposite
+    const [hourOpposite, setHourOpposite] = useState(new Date());
+    const [hourDisplayOpposite, setHourDisplayOpposite] = useState(("0" + dataNowOpposite.getHours()).slice(-2) + ":" + ("0" + dataNowOpposite.getMinutes()).slice(-2));
+    const [showTimeOpposite, setShowTimeOpposite] = useState(false);
+
+    const onChangeHour = (event, selectedDate) => {
+        setShowTime(false);
+        setHour(selectedDate);
+        setHourDisplay(("0" + selectedDate.getHours()).slice(-2) + ":" + ("0" + selectedDate.getMinutes()).slice(-2));
+    };
+    // Opposite
+    const onChangeHourOpposite = (event, selectedDate) => {
+        setShowTimeOpposite(false);
+        setHourOpposite(selectedDate);
+        setHourDisplayOpposite(("0" + selectedDate.getHours()).slice(-2) + ":" + ("0" + selectedDate.getMinutes()).slice(-2));
+    };
+
 
     return (
         <ScrollView style={styles.scrollView}>
@@ -79,7 +111,50 @@ const AllNotifications = props => {
                             style={styles.checkboxStyle}
                         />
                     </View>
-
+                    <Text style={styles.headerTitelHours}>שעות פעילות לקבלת התראות</Text>
+                    <View style={styles.containerAllHoursViews}>
+                        <View style={styles.containerDatePicker}>
+                            <View style={styles.labelTextImputContiner}>
+                                <MaterialIcons name="watch-later" size={24} color={Colors.primary} style={{ marginRight: 4 }} />
+                                <Text style={styles.labelTextImput}>שעת התחלה</Text>
+                            </View>
+                            <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTime(true)}>
+                                <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
+                                <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
+                                {showTime && (
+                                    <DateTimePicker
+                                        testID="dateTimePicker"
+                                        value={hour}
+                                        mode='time'
+                                        is24Hour={true}
+                                        display="default"
+                                        onChange={onChangeHour}
+                                    />
+                                )}
+                            </TouchableOpacity>
+                        </View>
+                        {/* Opposite */}
+                        <View style={styles.containerDatePicker}>
+                            <View style={styles.labelTextImputContiner}>
+                                <MaterialIcons name="watch-later" size={24} color={Colors.primary} style={{ marginRight: 4 }} />
+                                <Text style={styles.labelTextImput}>שעת סיום</Text>
+                            </View>
+                            <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTimeOpposite(true)}>
+                                <Text style={styles.hourTextStyle}>{hourDisplayOpposite}</Text>
+                                <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
+                                {showTimeOpposite && (
+                                    <DateTimePicker
+                                        testID="dateTimePicker"
+                                        value={hourOpposite}
+                                        mode='time'
+                                        is24Hour={true}
+                                        display="default"
+                                        onChange={onChangeHourOpposite}
+                                    />
+                                )}
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
                 <View style={styles.containingButton}>
                     <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('HomePage')}>
@@ -133,6 +208,50 @@ const styles = StyleSheet.create({
     checkboxStyle: {
         width: '20%',
         transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }]
+    },
+    headerTitelHours: {
+        color: Colors.primary,
+        fontSize: 17,
+        fontWeight: 'bold',
+        marginTop: 30,
+        marginBottom: 20,
+    },
+    containerAllHoursViews: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    containerDatePicker: {
+
+    },
+    labelTextImputContiner: {
+        flexDirection: 'row',
+        alignContent: 'flex-end',
+        alignItems: 'center',
+        paddingBottom: 5,
+    },
+    labelTextImput: {
+        color: Colors.primary,
+        fontWeight: 'bold',
+        fontSize: 14,
+        marginBottom: 2,
+        textAlign: 'left',
+    },
+    hourPickerStyle: {
+        color: Colors.primary,
+        borderColor: Colors.primary,
+        height: 40,
+        borderWidth: 1,
+        marginBottom: 20,
+        borderRadius: 10,
+        padding: 7,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    hourTextStyle: {
+        fontSize: 15,
+        color: Colors.primary,
+        marginLeft: "15%",
     },
     containingButton: {
         flexDirection: 'row',

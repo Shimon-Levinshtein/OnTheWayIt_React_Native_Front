@@ -69,7 +69,7 @@ const DeliveriesOnMyRoute = props => {
                         </View>
                     </View>
                     <View style={styles.bottomViewStatusConfirmed}>
-                        <TouchableOpacity style={styles.bottomButtonViewStatusConfirmed}>
+                        <TouchableOpacity style={styles.bottomButtonViewStatusConfirmed} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                             <Text style={styles.bottomTextButtonViewStatusConfirmed}>צפיה בפרטי המשלוח</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.bottomButtonViewStatusConfirmed}>
@@ -90,8 +90,8 @@ const DeliveriesOnMyRoute = props => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={styles.bottomViewStatusAwaitingForConfirm}>
-                        <TouchableOpacity style={styles.bottomButtonViewStatusAwaitingForConfirm}>
+                    <View style={styles.bottomViewStatusAwaitingForConfirm} >
+                        <TouchableOpacity style={styles.bottomButtonViewStatusAwaitingForConfirm} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                             <Text style={styles.bottomTextButtonViewStatusAwaitingForConfirm}>צפיה בפרטי המשלוח</Text>
                         </TouchableOpacity>
                         {/* <TouchableOpacity style={styles.bottomButtonViewStatusAwaitingForConfirm}>
@@ -113,10 +113,10 @@ const DeliveriesOnMyRoute = props => {
                         </View>
                     </View>
                     <View style={styles.bottomViewStatusWaitingYourConfirm}>
-                        <TouchableOpacity style={styles.bottomButtonViewStatusWaitingYourConfirm}>
+                        <TouchableOpacity style={styles.bottomButtonViewStatusWaitingYourConfirm} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                             <Text style={styles.bottomTextButtonViewStatusWaitingYourConfirm}>צפיה בפרטי המשלוח</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.bottomButtonViewStatusWaitingYourConfirm}>
+                        <TouchableOpacity style={styles.bottomButtonViewStatusWaitingYourConfirm} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                             <Text style={styles.bottomTextButtonViewStatusWaitingYourConfirm}>קבל משלוח</Text>
                         </TouchableOpacity>
                     </View>

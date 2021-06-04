@@ -30,27 +30,15 @@ const AddRegularRoute = props => {
 
 
     const [counterRoute, setCounterRoute] = useState(false);
-    const [showDate, setShowDate] = useState(false);
-    const [date, setDate] = useState(new Date());
-    const [dateDisplay, setDateDisplay] = useState(dataNow.toLocaleDateString('en-GB'));
     const [hour, setHour] = useState(new Date());
     const [hourDisplay, setHourDisplay] = useState(("0" + dataNow.getHours()).slice(-2) + ":" + ("0" + dataNow.getMinutes()).slice(-2));
     const [showTime, setShowTime] = useState(false);
     // Opposite
-    const [showDateOpposite, setShowDateOpposite] = useState(false);
-    const [dateOpposite, setDateOpposite] = useState(new Date());
-    const [dateDisplayOpposite, setDateDisplayOpposite] = useState(dataNowOpposite.toLocaleDateString('en-GB'));
     const [hourOpposite, setHourOpposite] = useState(new Date());
     const [hourDisplayOpposite, setHourDisplayOpposite] = useState(("0" + dataNowOpposite.getHours()).slice(-2) + ":" + ("0" + dataNowOpposite.getMinutes()).slice(-2));
     const [showTimeOpposite, setShowTimeOpposite] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
-    const onChangeDate = (event, selectedDate) => {
-        setShowDate(false);
-        setDate(selectedDate);
-        setDateDisplay(selectedDate.toLocaleDateString('en-GB'));
-    };
 
     const onChangeHour = (event, selectedDate) => {
         setShowTime(false);
@@ -59,11 +47,6 @@ const AddRegularRoute = props => {
 
     };
     // Opposite
-    const onChangeDateOpposite = (event, selectedDate) => {
-        setShowDateOpposite(false);
-        setDateOpposite(selectedDate);
-        setDateDisplayOpposite(selectedDate.toLocaleDateString('en-GB'));
-    };
 
     const onChangeHourOpposite = (event, selectedDate) => {
         setShowTimeOpposite(false);
@@ -174,24 +157,24 @@ const AddRegularRoute = props => {
                             )}
                         </TouchableOpacity>
                     </View>
-
+                    {/* Opposite */}
                     {counterRoute && <View style={styles.containerDatePicker}>
 
                         <View style={styles.labelTextImputContiner}>
                             <MaterialIcons name="watch-later" size={24} color={Colors.primary} style={{ marginRight: 4 }} />
                             <Text style={styles.labelTextImput}>שעת חזרה</Text>
                         </View>
-                        <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTime(true)}>
-                            <Text style={styles.hourTextStyle}>{hourDisplay}</Text>
+                        <TouchableOpacity style={styles.hourPickerStyle} onPress={() => setShowTimeOpposite(true)}>
+                            <Text style={styles.hourTextStyle}>{hourDisplayOpposite}</Text>
                             <MaterialIcons name="keyboard-arrow-down" size={24} color={Colors.primary} />
-                            {showTime && (
+                            {showTimeOpposite && (
                                 <DateTimePicker
                                     testID="dateTimePicker"
-                                    value={hour}
+                                    value={hourOpposite}
                                     mode='time'
                                     is24Hour={true}
                                     display="default"
-                                    onChange={onChangeHour}
+                                    onChange={onChangeHourOpposite}
                                 />
                             )}
                         </TouchableOpacity>

@@ -7,25 +7,24 @@ import Colors from '../../../../constants/Colors';
 
 
 const NotificationsIndex = props => {
-
     return (
         <View style={styles.continer}>
             <View style={styles.continingMiddle}>
                 <Text style={styles.titelNotifications}>שלא נקראו (2)</Text>
-                <TouchableOpacity style={styles.buttonNotifications} onPress={() => {}}>
+                <TouchableOpacity style={styles.buttonNotifications} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                     <Text style={styles.textTitelButtonNotifications}>שתי שקיות גדולות</Text>
                     <Text style={styles.textButtonNotifications}>לפני 4 שעות</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNotifications} onPress={() => {}}>
+                <TouchableOpacity style={styles.buttonNotifications} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                     <Text style={styles.textTitelButtonNotifications}>שולחן משרדי </Text>
                     <Text style={styles.textButtonNotifications}>לפני יום</Text>
                 </TouchableOpacity>
                 <Text style={styles.titelNotifications}>נקראו</Text>
-                <TouchableOpacity style={styles.buttonNotifications} onPress={() => {}}>
+                <TouchableOpacity style={styles.buttonNotifications} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                     <Text style={styles.textTitelButtonNotifications}>שתי שקיות גדולות</Text>
                     <Text style={styles.textButtonNotifications}>לפני 4 שעות</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNotifications} onPress={() => {}}>
+                <TouchableOpacity style={styles.buttonNotifications} onPress={() => props.navigation.navigate('DynamicScreensDriverStack', { screen: 'DynamicScreensDriverReceivingOrder' })}>
                     <Text style={styles.textTitelButtonNotifications}>שולחן משרדי </Text>
                     <Text style={styles.textButtonNotifications}>לפני יום</Text>
                 </TouchableOpacity>

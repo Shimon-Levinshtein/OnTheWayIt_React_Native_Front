@@ -54,6 +54,8 @@ import NotificationsDriverNotificationsIndex from '../screens/User/Driver/Notifi
 import NotificationsDriverAllNotifications from '../screens/User/Driver/Notifications/AllNotifications';
 import NotificationsDriverSurpluses from '../screens/User/Driver/Notifications/Surpluses';
 
+import DynamicScreensDriverReceivingOrder from '../screens/User/Driver/DynamicPages/OrdersScreens/ReceivingOrder';
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -246,6 +248,14 @@ const UserDriverNotificationsStack = () => {
   );
 };
 
+const DynamicScreensDriverStack = () => {
+  return (
+    <Stack.Navigator screenOptions={menuScreenOptions}>
+      <Stack.Screen name="DynamicScreensDriverReceivingOrder" component={DynamicScreensDriverReceivingOrder} options={{ title: 'האם ברצונך לקבל הזמנה זו?' }} />
+    </Stack.Navigator>
+  );
+};
+
 
 const DrawerNavigator = () => {
   return (
@@ -256,6 +266,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="CustomerServiceStack" component={CustomerServiceStack} options={{ title: 'Customer service' }} />
       <Drawer.Screen name="UserDriverPersonalAreaStack" component={UserDriverPersonalAreaStack} options={{ title: 'User Driver Personal Area' }} />
       <Drawer.Screen name="UserDriverNotificationsStack" component={UserDriverNotificationsStack} options={{ title: 'Notification driver' }} />
+      <Drawer.Screen name="DynamicScreensDriverStack" component={DynamicScreensDriverStack} options={{ title: 'Dynamic Screens Driver' }} />
     </Drawer.Navigator>
   );
 };
