@@ -142,7 +142,7 @@ const LoginOrSignUpDriverStack = () => {
       <Stack.Screen name="CreateAccountStepE" component={CreateAccountStepE} options={{ title: '' }} />
       <Stack.Screen name="CreateAccountStepF" component={CreateAccountStepF} options={{ title: '' }} />
       <Stack.Screen name="CreateAccountStepG" component={CreateAccountStepG} options={{ title: '' }} />
-      <Stack.Screen name="CreateAccountStepH" component={CreateAccountStepH} options={{ title: '' }} />
+      <Stack.Screen name="CreateAccountStepH" component={CreateAccountStepH} options={{ title: '',headerShown: false }} />
     </Stack.Navigator>
   );
 };
@@ -153,7 +153,7 @@ const AddingRouteDriverStack = () => {
       <Stack.Screen name="AddingRouteDriverStepA" component={AddingRouteDriverStepA} options={{ title: '' }} />
       <Stack.Screen name="AddingRouteDriverStepB" component={AddingRouteDriverStepB} options={{ title: '' }} />
       <Stack.Screen name="AddingRouteDriverStepC" component={AddingRouteDriverStepC} options={{ title: '' }} />
-      <Stack.Screen name="AddingRouteDriverStepD" component={AddingRouteDriverStepD} options={{ title: '' }} />
+      <Stack.Screen name="AddingRouteDriverStepD" component={AddingRouteDriverStepD} options={{ title: '',headerShown: false }} />
     </Stack.Navigator>
   );
 };
@@ -167,13 +167,13 @@ const CustomerServiceStack = () => {
       <Stack.Screen name="CustomerServiceDriverB" component={CustomerServiceDriverB} options={{ title: '' }} />
       <Stack.Screen name="CustomerServiceDriverC" component={CustomerServiceDriverC} options={{ title: '' }} />
       <Stack.Screen name="CustomerServiceDriverD" component={CustomerServiceDriverD} options={{ title: '' }} />
-      <Stack.Screen name="CustomerServiceDriverE" component={CustomerServiceDriverE} options={{ title: '' }} />
+      <Stack.Screen name="CustomerServiceDriverE" component={CustomerServiceDriverE} options={{ title: '',headerShown: false }} />
 
       <Stack.Screen name="CustomerOrderDeliveryA" component={CustomerOrderDeliveryA} options={{ title: '' }} />
       <Stack.Screen name="CustomerOrderDeliveryB" component={CustomerOrderDeliveryB} options={{ title: '' }} />
       <Stack.Screen name="CustomerOrderDeliveryC" component={CustomerOrderDeliveryC} options={{ title: '' }} />
       <Stack.Screen name="CustomerOrderDeliveryD" component={CustomerOrderDeliveryD} options={{ title: '' }} />
-      <Stack.Screen name="CustomerOrderDeliveryE" component={CustomerOrderDeliveryE} options={{ title: '' }} />
+      <Stack.Screen name="CustomerOrderDeliveryE" component={CustomerOrderDeliveryE} options={{ title: '',headerShown: false }} />
     </Stack.Navigator>
   );
 };

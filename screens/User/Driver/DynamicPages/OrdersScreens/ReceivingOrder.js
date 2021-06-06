@@ -57,7 +57,12 @@ const ReceivingOrder = props => {
                         </View>
                     </View>
                 </View>
-                
+                <View style={styles.priceWindowView}>
+                    <Text style={styles.priceWindowViewText}>מחיר השירות: ₪
+                    <Text style={styles.priceWindowViewTextBold}>100</Text></Text>
+
+                </View>
+
 
                 <View style={styles.containingButton}>
                     <TouchableOpacity style={styles.button} onPress={() => props.navigation.goBack()}>
@@ -84,6 +89,7 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         paddingHorizontal: '7%',
         marginBottom: 20,
+        alignItems: 'center',
     },
     TitelTextTop: {
         color: Colors.primary,
@@ -145,6 +151,25 @@ const styles = StyleSheet.create({
     leftTheRoutePresentationText: {
         color: Colors.primary,
         textAlign: 'left',
+    },
+    priceWindowView: {
+        borderWidth: 1,
+        borderColor: Colors.primary,
+        borderRadius: 5,
+        width: '80%',
+        marginVertical: 15,
+    },
+    priceWindowViewText: {
+        color: Colors.primary,
+        fontSize: 18,
+        textAlign: 'center',
+        marginVertical: 10,
+        marginHorizontal: 5,
+    },
+    priceWindowViewTextBold: {
+        color: Colors.primary,
+        fontWeight: 'bold',
+        fontSize: 25,
     },
     containingButton: {
         // height: 100,

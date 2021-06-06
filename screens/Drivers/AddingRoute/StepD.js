@@ -8,7 +8,7 @@ const StepD = props => {
 
 
     const handlerNextLevel = () => {
-        props.navigation.navigate('HomePage');
+        props.navigation.navigate('HomePage', { screen: 'HomePage' });
     };
 
 
